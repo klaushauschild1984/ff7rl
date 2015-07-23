@@ -1,2 +1,1 @@
-# ff7rl
-Final Fantasy 7 roguelike
+# Final Fantasy 7 Roguelike
