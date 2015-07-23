@@ -6,6 +6,7 @@
 package de.hauschild.ff7rl.state;
 
 import com.google.common.collect.Maps;
+import de.hauschild.ff7rl.Context;
 import de.hauschild.ff7rl.state.battle.BattleState;
 import de.hauschild.ff7rl.state.intro.IntroState;
 
@@ -38,11 +39,11 @@ public enum StateType {
     this.stateClass = stateClass;
   }
 
-  public State getState() {
+  public State getState(final Context context) {
     try {
       State state = STATES.get(this);
       if (state == null) {
-        state = stateClass.newInstance();
+        state = stateClass.getConstructor(Context.class).newInstance(context);
         STATES.put(this, state);
       }
       return state;

@@ -7,6 +7,7 @@ package de.hauschild.ff7rl.state.battle;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.screen.Screen;
+import de.hauschild.ff7rl.Context;
 import de.hauschild.ff7rl.assets.Sound;
 import de.hauschild.ff7rl.assets.Sounds;
 import de.hauschild.ff7rl.input.Input;
@@ -22,8 +23,8 @@ public class BattleState extends AbstractState {
 
   private Sound fightingSound;
 
-  public BattleState() {
-    super(StateType.BATTLE);
+  public BattleState(final Context context) {
+    super(StateType.BATTLE, context);
   }
 
   @Override
@@ -54,4 +55,5 @@ public class BattleState extends AbstractState {
     super.leave();
     fightingSound.stop();
   }
+
 }

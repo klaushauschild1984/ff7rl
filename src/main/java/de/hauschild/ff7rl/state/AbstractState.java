@@ -5,6 +5,7 @@
  */
 package de.hauschild.ff7rl.state;
 
+import de.hauschild.ff7rl.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,9 +17,11 @@ public abstract class AbstractState implements State {
   private static final Logger LOGGER = LoggerFactory.getLogger(AbstractState.class);
 
   private final StateType type;
+  private final Context context;
 
-  protected AbstractState(final StateType type) {
+  protected AbstractState(final StateType type, final Context context) {
     this.type = type;
+    this.context = context;
   }
 
   @Override
@@ -39,6 +42,10 @@ public abstract class AbstractState implements State {
   @Override
   public String toString() {
     return type.toString();
+  }
+
+  protected Context getContext() {
+    return context;
   }
 
 }

@@ -74,7 +74,7 @@ public class Main {
     // initialize context
     final Context context = new Context();
     // initialize state
-    State state = StateType.INTRO.getState(/* TODO give the context to state, from this point the state can access the context */);
+    State state = StateType.INTRO.getState(context);
     state.enter();
     boolean skipNextInput = false;
     while (true) {
@@ -95,7 +95,7 @@ public class Main {
       final StateType nextStateType = stateHandler.getNextStateType();
       if (nextStateType != null) {
         state.leave();
-        state = nextStateType.getState();
+        state = nextStateType.getState(context);
         state.enter();
       }
       final Integer skipNextInputMillis = stateHandler.getMillis();

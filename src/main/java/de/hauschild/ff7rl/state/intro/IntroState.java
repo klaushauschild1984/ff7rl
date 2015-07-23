@@ -7,6 +7,7 @@ package de.hauschild.ff7rl.state.intro;
 
 import com.google.common.collect.Lists;
 import com.googlecode.lanterna.screen.Screen;
+import de.hauschild.ff7rl.Context;
 import de.hauschild.ff7rl.assets.Resources;
 import de.hauschild.ff7rl.assets.Sound;
 import de.hauschild.ff7rl.assets.Sounds;
@@ -43,8 +44,8 @@ public class IntroState extends AbstractState {
   private Sound introSound;
   private MainMenuEntry mainMenuEntry = MainMenuEntry.NEW_GAME;
 
-  public IntroState() {
-    super(StateType.INTRO);
+  public IntroState(final Context context) {
+    super(StateType.INTRO, context);
   }
 
   @Override
