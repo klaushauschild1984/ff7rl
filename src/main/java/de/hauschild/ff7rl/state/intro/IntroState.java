@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -49,9 +50,8 @@ public class IntroState extends AbstractState {
   @Override
   public void enter() {
     super.enter();
-    try {
-      final BufferedReader reader = new BufferedReader(new InputStreamReader(
-          new BufferedInputStream(Resources.getInputStream("assets/misc", "intro.txt").openInputStream())));
+    try (final BufferedReader reader = new BufferedReader(new InputStreamReader(
+        new BufferedInputStream(Resources.getInputStream("assets/misc", "intro.txt").openInputStream()), StandardCharsets.UTF_8))) {
       String line;
       while ((line = reader.readLine()) != null) {
         title.add(line);
@@ -88,6 +88,7 @@ public class IntroState extends AbstractState {
       case ACCEPT:
         LOGGER.info("[{}] selected.", mainMenuEntry);
         stateHandler.nextState(StateType.BATTLE);
+        break;
     }
   }
 
