@@ -12,7 +12,7 @@ import de.hauschild.ff7rl.assets.Sound;
 import de.hauschild.ff7rl.assets.Sounds;
 import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.state.AbstractState;
-import de.hauschild.ff7rl.state.ScreenUtils;
+import de.hauschild.ff7rl.ui.ScreenUtils;
 import de.hauschild.ff7rl.state.StateHandler;
 import de.hauschild.ff7rl.state.StateType;
 
