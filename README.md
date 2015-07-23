@@ -17,3 +17,18 @@
       \/_/ \/___/  \/___L\ \/___/  \/____/\/____/ \/_/\/_/\/_/\/____/
                      /\____/
                      \_/__/
+
+## Project goals
+- re-create the original Final Fantasy 7 experience
+- make the clumsy 1997 graphics to really nerd ASCII art
+- convert original soundtrack to even more nerd stuff: chiptunes
+
+## Project tools
+- build by [Maven 3](https://maven.apache.org)
+- coded with [IntelliJ IDEA](https://www.jetbrains.com/idea)
+- main libraries
+    - [Lanterna](https://github.com/mabe02/lanterna)
+    - [Guava](https://github.com/google/guava)
+
+## Project author
+- [Klaus Hauschild](mailto:klaus.hauschild.1984@gmail.com)
