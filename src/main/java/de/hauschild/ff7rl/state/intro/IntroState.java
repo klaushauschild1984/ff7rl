@@ -15,6 +15,7 @@ import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.state.AbstractState;
 import de.hauschild.ff7rl.state.StateHandler;
 import de.hauschild.ff7rl.state.StateType;
+import de.hauschild.ff7rl.ui.ScreenMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,18 +32,9 @@ public class IntroState extends AbstractState {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(IntroState.class);
 
-  private enum MainMenuEntry {
-
-    NEW_GAME,
-
-    CONTINUE,
-
-  }
-
   private final List<String> title = Lists.newArrayList();
-
   private Sound introSound;
-  private MainMenuEntry mainMenuEntry = MainMenuEntry.NEW_GAME;
+  private ScreenMenu<MainMenuEntry> mainMenu;
 
   public IntroState(final Context context) {
     super(StateType.INTRO, context);
@@ -58,10 +50,11 @@ public class IntroState extends AbstractState {
         title.add(line);
       }
     } catch (final Exception exception) {
-      throw new RuntimeException("Unable to render intro.", exception);
+      throw new RuntimeException("Unable to read title graphic.", exception);
     }
     introSound = Sounds.getSound("Prelude.mp3");
     introSound.start();
+    mainMenu = new ScreenMenu<>(MainMenuEntry.values(), 35, 50);
   }
 
   @Override
@@ -72,22 +65,20 @@ public class IntroState extends AbstractState {
       i++;
     }
     screen.newTextGraphics().putString(96, 47, "(c) 2015 Klaus Hauschild");
-    screen.newTextGraphics().putString(50, 35 + mainMenuEntry.ordinal() * 2, "->");
-    screen.newTextGraphics().putString(53, 35, "New Game");
-    screen.newTextGraphics().putString(53, 37, "Continue");
+    mainMenu.display(screen);
   }
 
   @Override
   public void input(final Input input, final StateHandler stateHandler) {
     switch (input) {
       case DOWN:
-        mainMenuEntry = fromOrdinal(mainMenuEntry.ordinal() + 1);
+        mainMenu.next();
         break;
       case UP:
-        mainMenuEntry = fromOrdinal(mainMenuEntry.ordinal() - 1);
+        mainMenu.previous();
         break;
       case ACCEPT:
-        LOGGER.info("[{}] selected.", mainMenuEntry);
+        LOGGER.info("[{}] selected.", mainMenu.select());
         stateHandler.nextState(StateType.BATTLE);
         break;
     }
@@ -97,18 +88,6 @@ public class IntroState extends AbstractState {
   public void leave() {
     super.leave();
     introSound.stop();
-  }
-
-  private MainMenuEntry fromOrdinal(final int ordinal) {
-    if (ordinal == -1) {
-      return MainMenuEntry.values()[MainMenuEntry.values().length - 1];
-    }
-    for (final MainMenuEntry entry : MainMenuEntry.values()) {
-      if (entry.ordinal() == ordinal % MainMenuEntry.values().length) {
-        return entry;
-      }
-    }
-    throw new IllegalStateException();
   }
 
 }
