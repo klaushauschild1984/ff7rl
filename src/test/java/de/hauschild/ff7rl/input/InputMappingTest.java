@@ -19,7 +19,9 @@ public class InputMappingTest {
   public void writeInputFileTest() {
     final File inputMappingFile = new File("input.mapping");
     if (inputMappingFile.exists()) {
-      inputMappingFile.delete();
+      if (!inputMappingFile.delete()) {
+        throw new RuntimeException(String.format("Unable to delete [%s].", inputMappingFile));
+      }
     }
     new InputMapping();
   }

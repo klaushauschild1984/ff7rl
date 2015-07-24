@@ -27,7 +27,7 @@ import javax.swing.*;
 /**
  * @author Klaus Hauschild
  */
-public class Main {
+class Main {
 
   private final static Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
@@ -37,7 +37,7 @@ public class Main {
     terminalFactory.setSwingTerminalFrameTitle(String.format("Final Fantasy 7 - Roguelike (%s)", Version.get()));
     terminalFactory.setInitialTerminalSize(new TerminalSize(120, 48));
     final SwingTerminalFrame terminal = getTerminal(terminalFactory);
-    terminal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    terminal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     terminal.setResizable(false);
     terminal.setLocationRelativeTo(null);
     try {

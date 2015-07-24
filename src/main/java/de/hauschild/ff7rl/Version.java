@@ -16,7 +16,7 @@ import java.util.Properties;
 /**
  * @author Klaus Hauschild
  */
-public class Version {
+class Version {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(Version.class);
 

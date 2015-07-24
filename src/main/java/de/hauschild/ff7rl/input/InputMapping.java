@@ -80,7 +80,7 @@ public class InputMapping {
                   .transform(Iterables
                           .filter(Arrays.asList(KeyType.values()),
                               keyType -> keyType != KeyType.Character && keyType != KeyType.Unknown && keyType != KeyType.CursorLocation && keyType != KeyType.EOF),
-                      keyType -> keyType.name())) + "," + KeyStrokes.SPACE + "\n" +
+                      Enum::name)) + "," + KeyStrokes.SPACE + "\n" +
           "";
       inputMappings.store(writer, comments);
     } catch (final Exception exception) {
