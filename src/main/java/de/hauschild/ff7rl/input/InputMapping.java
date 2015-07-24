@@ -8,6 +8,8 @@ package de.hauschild.ff7rl.input;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -15,8 +17,10 @@ import com.google.common.io.Files;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -56,8 +60,26 @@ public class InputMapping {
   }
 
   private Map<KeyStroke, Input> readInputMapping() {
-    // TODO implement me
-    return null;
+    if (!INPUT_MAPPING_FILE.exists()) {
+      return null;
+    }
+    final Properties inputMapping = new Properties();
+    try (final BufferedReader reader = Files.newReader(INPUT_MAPPING_FILE, StandardCharsets.UTF_8)) {
+      inputMapping.load(reader);
+      final Map<KeyStroke, Input> result = Maps.newHashMap();
+      for (final Input input : Input.values()) {
+        final String keyStrokes = inputMapping.getProperty(input.name());
+        if (Strings.isNullOrEmpty(keyStrokes)) {
+          throw new IllegalStateException(String.format("No key binding for input [%s].", input));
+        }
+        for (final String keyStroke : Splitter.on(",").split(keyStrokes)) {
+          result.put(KeyStrokes.fromString(keyStroke), input);
+        }
+      }
+      return result;
+    } catch (final Exception exception) {
+      throw new RuntimeException("Unable to read input mapping file.", exception);
+    }
   }
 
   private void writeInputMapping() {
@@ -68,7 +90,6 @@ public class InputMapping {
           Joiner.on(",").join(Iterables.transform(keyStrokes, keyStroke -> KeyStrokes.toString(keyStroke.getKey()))));
     }
     try (final BufferedWriter writer = Files.newWriter(INPUT_MAPPING_FILE, Charsets.UTF_8)) {
-      // TODO more descriptive comment which keys are available
       final String comments =
           "Use this file to customize the your mappings.\n" +
           "One command can be mapped to multiple input. Multiple inputs has to be separated by comma (,).\n" +

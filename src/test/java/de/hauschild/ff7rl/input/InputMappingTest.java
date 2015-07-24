@@ -16,14 +16,25 @@ import java.io.File;
 public class InputMappingTest {
 
   @Test
-  public void writeInputFileTest() {
+  public void writeInputMappingFileTest() {
+    deleteInputMappingFile();
+    new InputMapping();
+  }
+
+  @Test
+  public void readInputMappingFileTest() {
+    deleteInputMappingFile();
+    new InputMapping();
+    new InputMapping();
+  }
+
+  private void deleteInputMappingFile() {
     final File inputMappingFile = new File("input.mapping");
     if (inputMappingFile.exists()) {
       if (!inputMappingFile.delete()) {
         throw new RuntimeException(String.format("Unable to delete [%s].", inputMappingFile));
       }
     }
-    new InputMapping();
   }
 
 }
