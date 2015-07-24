@@ -30,5 +30,9 @@
     - [Lanterna](https://github.com/mabe02/lanterna)
     - [Guava](https://github.com/google/guava)
 
+## Project resources
+- detailed reference about the original game internals [Q-Gears](http://q-gears.sourceforge.net/)
+- original [midi soundtrack](http://www.midishrine.com/index.php?id=85)
+
 ## Project author
 - [Klaus Hauschild](mailto:klaus.hauschild.1984@gmail.com)
