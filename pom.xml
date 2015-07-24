@@ -10,7 +10,7 @@
 
     <groupId>de.hauschild.ff7rl</groupId>
     <artifactId>ff7rl</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0-SNAPSHOT</version>
 
     <scm>
         <connection>scm:svn:http://foobar.com</connection>
