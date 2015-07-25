@@ -26,10 +26,6 @@ import java.io.StringWriter;
  */
 public class Console extends JFrame {
 
-  public static void main(final String[] args) {
-    SwingUtilities.invokeLater(() -> new Console().setVisible(true));
-  }
-
   private static boolean ENABLED = false;
   private static boolean OPENED = false;
   private static Binding CONSOLE_BINDING;
