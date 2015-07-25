@@ -6,12 +6,14 @@
  */
 package de.hauschild.ff7rl;
 
+import ch.qos.logback.classic.Level;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
 import de.hauschild.ff7rl.assets.Sounds;
+import de.hauschild.ff7rl.debug.Console;
 import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.input.InputMapping;
 import de.hauschild.ff7rl.state.State;
@@ -51,11 +53,23 @@ class Main {
   private static void processArguments(final String[] args) {
     final OptionParser optionParser = new OptionParser();
     final String muteOption = "mute";
+    final String debugOption = "debug";
     optionParser.accepts(muteOption, "Mutes the hole game.");
+    optionParser.accepts(debugOption, "Active the debug mode (logging, debug console)");
     final OptionSet options = optionParser.parse(args);
     if (options.has(muteOption)) {
       Sounds.mute();
     }
+    if (options.has(debugOption)) {
+      Console.enableDebugConsole();
+      setLogLevel(Level.DEBUG);
+    } else {
+      setLogLevel(Level.OFF);
+    }
+  }
+
+  private static void setLogLevel(final Level level) {
+    ((ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Main.class.getPackage().getName())).setLevel(level);
   }
 
   private static SwingTerminalFrame getTerminal(DefaultTerminalFactory terminalFactory) {
@@ -84,11 +98,15 @@ class Main {
       state.display(screen);
       screen.refresh();
       // update state
-      final Input input;
+      Input input;
       if (skipNextInput) {
         skipNextInput = false;
         input = null;
       } else {
+        input = inputMapping.map(screen.readInput());
+      }
+      if (input == Input.DEBUG_CONSOLE) {
+        Console.openDebugConsole(state);
         input = inputMapping.map(screen.readInput());
       }
       final StateHandler stateHandler = new StateHandler();
@@ -98,6 +116,7 @@ class Main {
         state.leave();
         state = nextStateType.getState(context);
         state.enter();
+        Console.rebind(state);
       }
       final Integer skipNextInputMillis = stateHandler.getMillis();
       if (skipNextInputMillis != null) {
