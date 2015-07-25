@@ -25,4 +25,6 @@ public enum Input {
 
   MENU,
 
+  DEBUG_CONSOLE,
+
 }

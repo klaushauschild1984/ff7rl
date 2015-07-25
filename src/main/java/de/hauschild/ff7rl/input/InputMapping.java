@@ -41,6 +41,7 @@ public class InputMapping {
       .put(new KeyStroke(KeyType.Escape), Input.ABORT)
       .put(new KeyStroke(KeyType.Backspace), Input.ABORT)
       .put(new KeyStroke(' ', false, false), Input.MENU)
+      .put(new KeyStroke(KeyType.ReverseTab), Input.DEBUG_CONSOLE)
       .build();
 
   private final Map<KeyStroke, Input> keyMappings;
