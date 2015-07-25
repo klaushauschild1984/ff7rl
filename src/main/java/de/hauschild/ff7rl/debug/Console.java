@@ -67,6 +67,7 @@ public class Console extends JFrame {
     setLocation(screenSize.width - getWidth(), screenSize.height - getHeight() - 40);
     output.setEditable(false);
     output.setFocusable(false);
+    output.setText("use 'describe(...)' to find out more");
     final Color foreground = new Color(169, 183, 198);
     final Color background = new Color(43, 43, 43);
     input.setForeground(foreground);
@@ -104,7 +105,7 @@ public class Console extends JFrame {
             // evaluate
             Object result;
             try {
-              result = new GroovyShell(CONSOLE_BINDING).evaluate(inputText);
+              result = new GroovyShell(CONSOLE_BINDING, ConsoleScriptHelper.getCompilerConfiguration()).evaluate(inputText);
             } catch (final GroovyRuntimeException exception) {
               final StringWriter stringWriter = new StringWriter();
               exception.printStackTrace(new PrintWriter(stringWriter));

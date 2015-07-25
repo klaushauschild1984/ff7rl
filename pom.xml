@@ -138,6 +138,11 @@
             <artifactId>guava</artifactId>
             <version>18.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>4.1.7.RELEASE</version>
+        </dependency>
         <!-- /common stuff -->
         <!-- tests -->
         <dependency>
