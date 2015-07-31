@@ -29,31 +29,8 @@ public class Console extends JFrame {
   private static boolean ENABLED = false;
   private static boolean OPENED = false;
   private static Binding CONSOLE_BINDING;
-
-  public static void enableDebugConsole() {
-    ENABLED = true;
-  }
-
-  public static void openDebugConsole(final State state) {
-    if (!ENABLED || OPENED) {
-      return;
-    }
-    new Console().setVisible(true);
-    OPENED = true;
-    rebind(state);
-  }
-
-  public static void rebind(final State state) {
-    if (!ENABLED || !OPENED) {
-      return;
-    }
-    CONSOLE_BINDING = new Binding();
-    CONSOLE_BINDING.setVariable("state", state);
-  }
-
   private final JTextArea output = new JTextArea();
   private final JTextField input = new JTextField();
-
   private final InputHistory inputHistory = new InputHistory();
 
   private Console() {
@@ -86,36 +63,58 @@ public class Console extends JFrame {
     final Font monospacedFont = new Font("monospaced", Font.PLAIN, 16);
     input.setFont(monospacedFont);
     output.setFont(monospacedFont);
-    input.addKeyListener(new KeyAdapter() {
-
-      @Override
-      public void keyPressed(final KeyEvent e) {
-        switch (e.getKeyCode()) {
-          case KeyEvent.VK_UP:
-            input.setText(inputHistory.previous());
-            break;
-          case KeyEvent.VK_DOWN:
-            input.setText(inputHistory.next());
-            break;
-          case KeyEvent.VK_ENTER:
-            final String inputText = input.getText();
-            input.setText("");
-            // store in history
-            inputHistory.store(inputText);
-            // evaluate
-            Object result;
-            try {
-              result = new GroovyShell(CONSOLE_BINDING, ConsoleScriptHelper.getCompilerConfiguration()).evaluate(inputText);
-            } catch (final GroovyRuntimeException exception) {
-              final StringWriter stringWriter = new StringWriter();
-              exception.printStackTrace(new PrintWriter(stringWriter));
-              result = stringWriter.toString();
-            }
-            output.append(String.format("> %s%n%s%n%n", inputText, MoreObjects.firstNonNull(result,"(void)")));
-            break;
-        }
-      }
-    });
+    input.addKeyListener(new ConsoleKeyAdapter());
   }
 
+  public static void enableDebugConsole() {
+    ENABLED = true;
+  }
+
+  public static void openDebugConsole(final State state) {
+    if (!ENABLED || OPENED) {
+      return;
+    }
+    new Console().setVisible(true);
+    OPENED = true;
+    rebind(state);
+  }
+
+  public static void rebind(final State state) {
+    if (!ENABLED || !OPENED) {
+      return;
+    }
+    CONSOLE_BINDING = new Binding();
+    CONSOLE_BINDING.setVariable("state", state);
+  }
+
+  private class ConsoleKeyAdapter extends KeyAdapter {
+
+    @Override
+    public void keyPressed(final KeyEvent e) {
+      switch (e.getKeyCode()) {
+        case KeyEvent.VK_UP:
+          input.setText(inputHistory.previous());
+          break;
+        case KeyEvent.VK_DOWN:
+          input.setText(inputHistory.next());
+          break;
+        case KeyEvent.VK_ENTER:
+          final String inputText = input.getText();
+          input.setText("");
+          // store in history
+          inputHistory.store(inputText);
+          // evaluate
+          Object result;
+          try {
+            result = new GroovyShell(CONSOLE_BINDING, ConsoleScriptHelper.getCompilerConfiguration()).evaluate(inputText);
+          } catch (final GroovyRuntimeException exception) {
+            final StringWriter stringWriter = new StringWriter();
+            exception.printStackTrace(new PrintWriter(stringWriter));
+            result = stringWriter.toString();
+          }
+          output.append(String.format("> %s%n%s%n%n", inputText, MoreObjects.firstNonNull(result, "(void)")));
+          break;
+      }
+    }
+  }
 }

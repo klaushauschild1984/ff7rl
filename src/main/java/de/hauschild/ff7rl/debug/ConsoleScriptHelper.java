@@ -29,6 +29,9 @@ public class ConsoleScriptHelper {
       .add("Script1")
       .build();
 
+  private ConsoleScriptHelper() {
+  }
+
   public static CompilerConfiguration getCompilerConfiguration() {
     final CompilerConfiguration compilerConfiguration = new CompilerConfiguration();
     compilerConfiguration.setScriptBaseClass(ConsoleScript.class.getName());

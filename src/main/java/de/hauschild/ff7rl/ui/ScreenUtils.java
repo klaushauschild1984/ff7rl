@@ -13,11 +13,14 @@ import com.googlecode.lanterna.graphics.TextGraphics;
  */
 public class ScreenUtils {
 
+  private ScreenUtils() {
+  }
+
   public static void renderBox(final TextGraphics textGraphics, final int top, final int left, final int width, final int height) {
     // place corners
     textGraphics.putString(left, top, "+");
     textGraphics.putString(left + width, top, "+");
-    textGraphics.putString(left,top + height,  "+");
+    textGraphics.putString(left, top + height, "+");
     textGraphics.putString(left + width, top + height, "+");
     // draw lines
     for (int i = left + 1; i < left + width; i++) {

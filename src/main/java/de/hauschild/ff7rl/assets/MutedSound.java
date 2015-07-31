@@ -13,14 +13,17 @@ public class MutedSound implements Sound {
 
   @Override
   public void loop() {
+    // nothing to do
   }
 
   @Override
   public void start() {
+    // nothing to do
   }
 
   @Override
   public void stop() {
+    // nothing to do
   }
 
 }

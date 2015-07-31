@@ -21,8 +21,10 @@ public class Sounds {
   private static final Logger LOGGER = LoggerFactory.getLogger(Sounds.class);
 
   private static final Map<String, Sound> SOUNDS = Maps.newHashMap();
-
   private static boolean MUTE = false;
+
+  private Sounds() {
+  }
 
   public static Sound getSound(final String soundName) {
     LOGGER.debug("Requesting sound [{}]", soundName);

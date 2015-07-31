@@ -22,6 +22,9 @@ class KeyStrokes {
   private static final String CTRL = "Ctrl";
   private static final String ALT = "Alt";
 
+  private KeyStrokes() {
+  }
+
   public static KeyStroke fromString(final String keyStrokeAsString) {
     KeyType keyType = null;
     Character character = null;

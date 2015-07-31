@@ -34,6 +34,9 @@ public class Resources {
     }, Resources.class.getSimpleName()));
   }
 
+  private Resources() {
+  }
+
   public static InputStreamProvider getInputStream(final String assetPath, final String resourceName) {
     final StringBuilder resourcePathBuilder = new StringBuilder();
     if (assetPath != null) {

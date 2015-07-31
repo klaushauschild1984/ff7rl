@@ -33,6 +33,9 @@ class Main {
 
   private final static Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
+  private Main() {
+  }
+
   public static void main(final String[] args) {
     processArguments(args);
     final DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();

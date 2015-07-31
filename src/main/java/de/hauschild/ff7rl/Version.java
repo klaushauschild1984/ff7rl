@@ -20,6 +20,9 @@ class Version {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(Version.class);
 
+  private Version() {
+  }
+
   public static String get() {
     try {
       final Properties versionProperties = new Properties();
