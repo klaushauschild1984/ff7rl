@@ -78,7 +78,7 @@ public class Console extends JFrame {
     addWindowListener(new WindowAdapter() {
 
       @Override
-      public void windowOpened(final WindowEvent e) {
+      public void windowOpened(final WindowEvent event) {
         input.requestFocus();
       }
 
