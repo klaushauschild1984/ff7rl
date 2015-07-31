@@ -31,7 +31,7 @@ import javax.swing.*;
  */
 class Main {
 
-  private final static Logger LOGGER = LoggerFactory.getLogger(Main.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
 
   private Main() {
   }
