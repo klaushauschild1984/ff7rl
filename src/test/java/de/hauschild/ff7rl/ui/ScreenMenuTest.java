@@ -6,35 +6,35 @@
  */
 package de.hauschild.ff7rl.ui;
 
+import com.google.common.collect.Lists;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * @author Klaus Hauschild
  */
 public class ScreenMenuTest {
 
-  enum Menu {
-    A, B, C
-  }
-
   @Test
   public void cursorPositionTest() {
-    final ScreenMenu<Menu> screenMenu = new ScreenMenu<>(Menu.values(), 0, 0);
-    assertTrue(screenMenu.select() == Menu.A);
+    final List<ScreenMenu.Entry> entries = Lists.newArrayList(new ScreenMenu.Entry("A"), new ScreenMenu.Entry("B"), new ScreenMenu.Entry("C"));
+    final ScreenMenu<?> screenMenu = new ScreenMenu<>(entries, 0, 0);
+    assertEquals(screenMenu.select().getLabel(), "A");
     screenMenu.next();
-    assertTrue(screenMenu.select() == Menu.B);
+    assertEquals(screenMenu.select().getLabel(), "B");
     screenMenu.next();
-    assertTrue(screenMenu.select() == Menu.C);
+    assertEquals(screenMenu.select().getLabel(), "C");
     screenMenu.next();
-    assertTrue(screenMenu.select() == Menu.A);
+    assertEquals(screenMenu.select().getLabel(), "A");
     screenMenu.previous();
-    assertTrue(screenMenu.select() == Menu.C);
+    assertEquals(screenMenu.select().getLabel(), "C");
     screenMenu.previous();
-    assertTrue(screenMenu.select() == Menu.B);
+    assertEquals(screenMenu.select().getLabel(), "B");
     screenMenu.previous();
-    assertTrue(screenMenu.select() == Menu.A);
+    assertEquals(screenMenu.select().getLabel(), "A");
   }
 
 }

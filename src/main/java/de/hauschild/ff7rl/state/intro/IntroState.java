@@ -35,7 +35,7 @@ public class IntroState extends AbstractState {
 
   private final List<String> title = Lists.newArrayList();
   private Sound introSound;
-  private ScreenMenu<MainMenuEntry> mainMenu;
+  private ScreenMenu<ScreenMenu.Entry> mainMenu;
 
   public IntroState(final Context context) {
     super(StateType.INTRO, context);
@@ -55,7 +55,10 @@ public class IntroState extends AbstractState {
     }
     introSound = Sounds.getSound("Prelude.mp3");
     introSound.start();
-    mainMenu = new ScreenMenu<>(MainMenuEntry.values(), 35, 50);
+    final ScreenMenu.Entry newGameEntry = new ScreenMenu.Entry("New Game");
+    final ScreenMenu.Entry continueEntry = new ScreenMenu.Entry("Continue", false);
+    final ScreenMenu.Entry bossRushEntry = new ScreenMenu.Entry("Boss Rush");
+    mainMenu = new ScreenMenu<>(Lists.newArrayList(newGameEntry, continueEntry, bossRushEntry), 35, 50);
   }
 
   @Override
