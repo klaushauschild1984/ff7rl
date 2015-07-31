@@ -26,6 +26,9 @@ public class ScreenMenu<E extends ScreenMenu.Entry> {
     this.menuEntries = menuEntries;
     this.top = top;
     this.left = left;
+    while (!select().isEnabled()) {
+      next();
+    }
   }
 
   public void display(final Screen screen) {
