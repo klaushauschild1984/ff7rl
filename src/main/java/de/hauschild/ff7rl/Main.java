@@ -90,7 +90,7 @@ class Main {
     // initialize key mapping
     final InputMapping inputMapping = new InputMapping();
     // initialize context
-    final Context context = new Context();
+    final Context context = Context.createStartContext();
     // initialize state
     State state = StateType.INTRO.getState(context);
     state.enter();

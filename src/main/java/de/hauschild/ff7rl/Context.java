@@ -23,6 +23,10 @@ public class Context {
   private long gil;
   private List<Actor> currentParty = Lists.newArrayList();
 
+  public static Context createStartContext() {
+    return new Context();
+  }
+
   public static Context fromJson(final String json) {
     return GSON.fromJson(json, Context.class);
   }
