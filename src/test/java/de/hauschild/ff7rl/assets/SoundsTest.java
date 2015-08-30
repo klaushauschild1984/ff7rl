@@ -15,7 +15,8 @@ import static org.testng.Assert.fail;
  */
 public class SoundsTest {
 
-  @Test
+  // TODO enable test some day
+  @Test(enabled = false)
   public void playSoundTest() throws Exception {
     final Sound sound = Sounds.getSound("Prelude.mp3");
     sound.start();
