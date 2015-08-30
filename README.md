@@ -37,3 +37,6 @@
 
 ## Project author
 - [Klaus Hauschild](mailto:klaus.hauschild.1984@gmail.com)
+
+## Project status
+- [![Build Status][travis_img]][travis_link]
