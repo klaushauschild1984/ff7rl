@@ -6,35 +6,35 @@
  */
 package de.hauschild.ff7rl.input;
 
-import org.testng.annotations.Test;
-
 import java.io.File;
+
+import org.testng.annotations.Test;
 
 /**
  * @author Klaus Hauschild
  */
 public class InputMappingTest {
 
-  @Test
-  public void writeInputMappingFileTest() {
-    deleteInputMappingFile();
-    new InputMapping();
-  }
-
-  @Test
-  public void readInputMappingFileTest() {
-    deleteInputMappingFile();
-    new InputMapping();
-    new InputMapping();
-  }
-
-  private void deleteInputMappingFile() {
-    final File inputMappingFile = new File("input.mapping");
-    if (inputMappingFile.exists()) {
-      if (!inputMappingFile.delete()) {
-        throw new RuntimeException(String.format("Unable to delete [%s].", inputMappingFile));
-      }
+    @Test
+    public void writeInputMappingFileTest() {
+        deleteInputMappingFile();
+        new InputMapping();
     }
-  }
+
+    @Test
+    public void readInputMappingFileTest() {
+        deleteInputMappingFile();
+        new InputMapping();
+        new InputMapping();
+    }
+
+    private void deleteInputMappingFile() {
+        final File inputMappingFile = new File("input.mapping");
+        if (inputMappingFile.exists()) {
+            if (!inputMappingFile.delete()) {
+                throw new RuntimeException(String.format("Unable to delete [%s].", inputMappingFile));
+            }
+        }
+    }
 
 }

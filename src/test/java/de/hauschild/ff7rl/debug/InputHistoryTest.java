@@ -6,29 +6,29 @@
  */
 package de.hauschild.ff7rl.debug;
 
-import org.testng.annotations.Test;
-
 import static org.testng.Assert.assertEquals;
+
+import org.testng.annotations.Test;
 
 /**
  * @author Klaus Hauschild
  */
 public class InputHistoryTest {
 
-  @Test
-  public void inputHistoryTest() {
-    final InputHistory inputHistory = new InputHistory();
-    inputHistory.store("a");
-    inputHistory.store("b");
-    inputHistory.store("c");
-    assertEquals(inputHistory.previous(), "c");
-    assertEquals(inputHistory.previous(), "b");
-    assertEquals(inputHistory.previous(), "a");
-    assertEquals(inputHistory.previous(), "a");
-    assertEquals(inputHistory.next(), "a");
-    assertEquals(inputHistory.next(), "b");
-    assertEquals(inputHistory.next(), "c");
-    assertEquals(inputHistory.next(), "c");
-  }
+    @Test
+    public void inputHistoryTest() {
+        final InputHistory inputHistory = new InputHistory();
+        inputHistory.store("a");
+        inputHistory.store("b");
+        inputHistory.store("c");
+        assertEquals(inputHistory.previous(), "c");
+        assertEquals(inputHistory.previous(), "b");
+        assertEquals(inputHistory.previous(), "a");
+        assertEquals(inputHistory.previous(), "a");
+        assertEquals(inputHistory.next(), "a");
+        assertEquals(inputHistory.next(), "b");
+        assertEquals(inputHistory.next(), "c");
+        assertEquals(inputHistory.next(), "c");
+    }
 
 }

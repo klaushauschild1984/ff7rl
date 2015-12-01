@@ -69,7 +69,7 @@ public class ScreenMenu<E extends ScreenMenu.Entry> {
 
   public static class Entry {
 
-    private String label;
+    private final String label;
     private boolean enabled;
 
     public Entry(final String label) {

@@ -11,7 +11,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Klaus Hauschild
  */
-public class InputHistory {
+class InputHistory {
 
   private final java.util.List<String> inputHistory = Lists.newArrayList();
   private int inputHistoryPointer = 0;

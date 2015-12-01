@@ -20,7 +20,7 @@ import java.util.Set;
 /**
  * @author Klaus Hauschild
  */
-public class ConsoleScriptHelper {
+class ConsoleScriptHelper {
 
   private static final Set<String> IGNORE_BY_CLASSNAME = ImmutableSet.<String>builder()
       .add(Object.class.getName())

@@ -136,19 +136,19 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>18.0</version>
+            <version>19.0-rc2</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.3.1</version>
+            <version>2.5</version>
         </dependency>
         <!-- /common stuff -->
         <!-- tests -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.9.6</version>
+            <version>6.9.9</version>
             <scope>test</scope>
         </dependency>
         <!-- /tests -->
@@ -177,14 +177,14 @@
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>2.4.4</version>
+            <version>2.4.5</version>
         </dependency>
         <!-- /script evaluation -->
         <!-- logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.12</version>
+            <version>1.7.13</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -218,8 +218,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
-                        <!-- Minimal supported version is 2.4 -->
-                        <version>2.13</version>
+                        <version>2.14.1</version>
                         <configuration>
                             <properties>
                                 <property>

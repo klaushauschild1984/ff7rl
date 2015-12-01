@@ -6,35 +6,37 @@
  */
 package de.hauschild.ff7rl.ui;
 
-import com.google.common.collect.Lists;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
+import org.testng.annotations.Test;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Klaus Hauschild
  */
 public class ScreenMenuTest {
 
-  @Test
-  public void cursorPositionTest() {
-    final List<ScreenMenu.Entry> entries = Lists.newArrayList(new ScreenMenu.Entry("A"), new ScreenMenu.Entry("B"), new ScreenMenu.Entry("C"));
-    final ScreenMenu<?> screenMenu = new ScreenMenu<>(entries, 0, 0);
-    assertEquals(screenMenu.select().getLabel(), "A");
-    screenMenu.next();
-    assertEquals(screenMenu.select().getLabel(), "B");
-    screenMenu.next();
-    assertEquals(screenMenu.select().getLabel(), "C");
-    screenMenu.next();
-    assertEquals(screenMenu.select().getLabel(), "A");
-    screenMenu.previous();
-    assertEquals(screenMenu.select().getLabel(), "C");
-    screenMenu.previous();
-    assertEquals(screenMenu.select().getLabel(), "B");
-    screenMenu.previous();
-    assertEquals(screenMenu.select().getLabel(), "A");
-  }
+    @Test
+    public void cursorPositionTest() {
+        final List<ScreenMenu.Entry> entries = Lists.newArrayList(new ScreenMenu.Entry("A"), new ScreenMenu.Entry("B"),
+                new ScreenMenu.Entry("C"));
+        final ScreenMenu<?> screenMenu = new ScreenMenu<>(entries, 0, 0);
+        assertEquals(screenMenu.select().getLabel(), "A");
+        screenMenu.next();
+        assertEquals(screenMenu.select().getLabel(), "B");
+        screenMenu.next();
+        assertEquals(screenMenu.select().getLabel(), "C");
+        screenMenu.next();
+        assertEquals(screenMenu.select().getLabel(), "A");
+        screenMenu.previous();
+        assertEquals(screenMenu.select().getLabel(), "C");
+        screenMenu.previous();
+        assertEquals(screenMenu.select().getLabel(), "B");
+        screenMenu.previous();
+        assertEquals(screenMenu.select().getLabel(), "A");
+    }
 
 }

@@ -21,7 +21,7 @@ public class Context {
 
   private long stepCounter;
   private long gil;
-  private List<Actor> currentParty = Lists.newArrayList();
+  private final List<Actor> currentParty = Lists.newArrayList();
 
   public static Context createStartContext() {
     return new Context();
