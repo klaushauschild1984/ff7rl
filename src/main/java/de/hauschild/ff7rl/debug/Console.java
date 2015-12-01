@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import javax.swing.*;
+import javax.swing.text.DefaultCaret;
 
 import com.google.common.base.MoreObjects;
 
@@ -44,6 +45,8 @@ public class Console extends JFrame {
         setSize(800, 600);
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation(screenSize.width - getWidth(), screenSize.height - getHeight() - 40);
+        DefaultCaret caret = (DefaultCaret)output.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         output.setEditable(false);
         output.setFocusable(false);
         output.setText("use 'describe(...)' to find out more");
