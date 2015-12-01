@@ -72,6 +72,7 @@
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.assemblyName>${project.artifactId}-${project.version}-${buildNumber}</project.assemblyName>
     </properties>
 
     <!-- Build Settings -->
@@ -172,7 +173,30 @@
                                 </manifest>
                             </archive>
                             <appendAssemblyId>false</appendAssemblyId>
-                            <finalName>${project.artifactId}-${project.version}-${buildNumber}</finalName>
+                            <finalName>${project.assemblyName}</finalName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>1.7.8</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <headerType>gui</headerType>
+                            <outfile>target/${project.assemblyName}.exe</outfile>
+                            <jar>target/${project.assemblyName}.jar</jar>
+                            <jre>
+                                <minVersion>1.8.0</minVersion>
+                                <initialHeapSize>128</initialHeapSize>
+                                <maxHeapSize>1024</maxHeapSize>
+                            </jre>
                         </configuration>
                     </execution>
                 </executions>
