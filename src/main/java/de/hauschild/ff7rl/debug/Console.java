@@ -23,11 +23,15 @@ import de.hauschild.ff7rl.state.State;
 import groovy.lang.Binding;
 import groovy.lang.GroovyRuntimeException;
 import groovy.lang.GroovyShell;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Klaus Hauschild
  */
 public class Console extends JFrame {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Console.class);
 
     private static boolean     ENABLED      = false;
     private static boolean     OPENED       = false;
@@ -49,7 +53,7 @@ public class Console extends JFrame {
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         output.setEditable(false);
         output.setFocusable(false);
-        output.setText("use 'describe(...)' to find out more");
+        output.setText("use 'describe(...)' to find out more\n\r\n\r");
         final Color foreground = new Color(169, 183, 198);
         final Color background = new Color(43, 43, 43);
         input.setForeground(foreground);
@@ -114,9 +118,8 @@ public class Console extends JFrame {
                         result = new GroovyShell(CONSOLE_BINDING, ConsoleScriptHelper.getCompilerConfiguration())
                                 .evaluate(inputText);
                     } catch (final GroovyRuntimeException exception) {
-                        final StringWriter stringWriter = new StringWriter();
-                        exception.printStackTrace(new PrintWriter(stringWriter));
-                        result = stringWriter.toString();
+                        LOGGER.error(String.format("Error while evaluating [%s]", inputText), exception);
+                        result = exception.getMessage();
                     }
                     output.append(String.format("> %s%n%s%n%n", inputText, MoreObjects.firstNonNull(result, "(void)")));
                     break;
