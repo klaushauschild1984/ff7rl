@@ -14,8 +14,8 @@ import java.io.InputStream;
  */
 public interface InputStreamProvider {
 
-  InputStream openInputStream();
+    InputStream openInputStream();
 
-  void close() throws IOException;
+    void close() throws IOException;
 
 }

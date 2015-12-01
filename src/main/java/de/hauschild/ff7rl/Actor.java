@@ -11,24 +11,24 @@ package de.hauschild.ff7rl;
  */
 public enum Actor {
 
-  CLOUD,
+    CLOUD,
 
-  TIFA,
+    TIFA,
 
-  BARRET,
+    BARRET,
 
-  AERIS,
+    AERIS,
 
-  RED_XIII,
+    RED_XIII,
 
-  CAIT_SITH,
+    CAIT_SITH,
 
-  CID,
+    CID,
 
-  YUFIE,
+    YUFIE,
 
-  VINCENT,
+    VINCENT,
 
-  SEPHIROTH,
+    SEPHIROTH,
 
 }

@@ -6,47 +6,48 @@
  */
 package de.hauschild.ff7rl.state;
 
-import de.hauschild.ff7rl.Context;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import de.hauschild.ff7rl.Context;
 
 /**
  * @author Klaus Hauschild
  */
 public abstract class AbstractState implements State {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(AbstractState.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractState.class);
 
-  private final StateType type;
-  private final Context context;
+    private final StateType     type;
+    private final Context       context;
 
-  protected AbstractState(final StateType type, final Context context) {
-    this.type = type;
-    this.context = context;
-  }
+    protected AbstractState(final StateType type, final Context context) {
+        this.type = type;
+        this.context = context;
+    }
 
-  @Override
-  public StateType getType() {
-    return type;
-  }
+    @Override
+    public StateType getType() {
+        return type;
+    }
 
-  @Override
-  public void enter() {
-    LOGGER.debug("Enter state [{}].", this);
-  }
+    @Override
+    public void enter() {
+        LOGGER.debug("Enter state [{}].", this);
+    }
 
-  @Override
-  public void leave() {
-    LOGGER.debug("Leave state [{}].", this);
-  }
+    @Override
+    public void leave() {
+        LOGGER.debug("Leave state [{}].", this);
+    }
 
-  @Override
-  public String toString() {
-    return type.toString();
-  }
+    @Override
+    public String toString() {
+        return type.toString();
+    }
 
-  protected Context getContext() {
-    return context;
-  }
+    protected Context getContext() {
+        return context;
+    }
 
 }

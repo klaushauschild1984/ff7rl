@@ -6,33 +6,33 @@
  */
 package de.hauschild.ff7rl;
 
-import de.hauschild.ff7rl.assets.Resources;
+import java.io.InputStream;
+import java.util.Properties;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.InputStream;
-import java.util.Properties;
+import de.hauschild.ff7rl.assets.Resources;
 
 /**
  * @author Klaus Hauschild
  */
-class Version {
+enum Version {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(Version.class);
+    ;
 
-  private Version() {
-  }
+    private static final Logger LOGGER = LoggerFactory.getLogger(Version.class);
 
-  public static String get() {
-    try {
-      final Properties versionProperties = new Properties();
-      final InputStream versionInputStream = Resources.getInputStream(null, "version.properties").openInputStream();
-      versionProperties.load(versionInputStream);
-      return versionProperties.getProperty("version");
-    } catch (final Exception exception) {
-      LOGGER.error("Unable to determine version.", exception);
-      return "<unknown>";
+    public static String get() {
+        try {
+            final Properties versionProperties = new Properties();
+            final InputStream versionInputStream = Resources.getInputStream(null, "version.properties").openInputStream();
+            versionProperties.load(versionInputStream);
+            return versionProperties.getProperty("version");
+        } catch (final Exception exception) {
+            LOGGER.error("Unable to determine version.", exception);
+            return "<unknown>";
+        }
     }
-  }
 
 }

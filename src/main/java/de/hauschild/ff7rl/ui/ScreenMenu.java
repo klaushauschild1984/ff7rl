@@ -6,93 +6,93 @@
  */
 package de.hauschild.ff7rl.ui;
 
+import java.util.List;
+
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-
-import java.util.List;
 
 /**
  * @author Klaus Hauschild
  */
 public class ScreenMenu<E extends ScreenMenu.Entry> {
 
-  private final List<E> menuEntries;
-  private final int top;
-  private final int left;
-  private int cursorPosition;
+    private final List<E> menuEntries;
+    private final int     top;
+    private final int     left;
+    private int           cursorPosition;
 
-  public ScreenMenu(final List<E> menuEntries, final int top, final int left) {
-    this.menuEntries = menuEntries;
-    this.top = top;
-    this.left = left;
-    while (!select().isEnabled()) {
-      next();
-    }
-  }
-
-  public void display(final Screen screen) {
-    final TextGraphics graphics = screen.newTextGraphics();
-    graphics.putString(left, top + 2 * cursorPosition, "->");
-    for (int i = 0; i < menuEntries.size(); i++) {
-      E entry = menuEntries.get(i);
-      if (entry.isEnabled()) {
-        graphics.setForegroundColor(TextColor.ANSI.DEFAULT);
-      } else {
-        graphics.setForegroundColor(new TextColor.RGB(100, 100, 100));
-      }
-      graphics.putString(left + 4, top + i * 2, entry.getLabel());
-    }
-  }
-
-  public void next() {
-    cursorPosition++;
-    cursorPosition %= menuEntries.size();
-    if (!select().isEnabled()) {
-      next();
-    }
-  }
-
-  public void previous() {
-    cursorPosition--;
-    if (cursorPosition == -1) {
-      cursorPosition = menuEntries.size() - 1;
-    }
-    if (!select().isEnabled()) {
-      previous();
-    }
-  }
-
-  public E select() {
-    return menuEntries.get(cursorPosition);
-  }
-
-  public static class Entry {
-
-    private final String label;
-    private boolean enabled;
-
-    public Entry(final String label) {
-      this(label, true);
+    public ScreenMenu(final List<E> menuEntries, final int top, final int left) {
+        this.menuEntries = menuEntries;
+        this.top = top;
+        this.left = left;
+        while (!select().isEnabled()) {
+            next();
+        }
     }
 
-    public Entry(final String label, final boolean enabled) {
-      this.label = label;
-      this.enabled = enabled;
+    public void display(final Screen screen) {
+        final TextGraphics graphics = screen.newTextGraphics();
+        graphics.putString(left, top + 2 * cursorPosition, "->");
+        for (int i = 0; i < menuEntries.size(); i++) {
+            E entry = menuEntries.get(i);
+            if (entry.isEnabled()) {
+                graphics.setForegroundColor(TextColor.ANSI.DEFAULT);
+            } else {
+                graphics.setForegroundColor(new TextColor.RGB(100, 100, 100));
+            }
+            graphics.putString(left + 4, top + i * 2, entry.getLabel());
+        }
     }
 
-    public boolean isEnabled() {
-      return enabled;
+    public void next() {
+        cursorPosition++;
+        cursorPosition %= menuEntries.size();
+        if (!select().isEnabled()) {
+            next();
+        }
     }
 
-    public void setEnabled(boolean enabled) {
-      this.enabled = enabled;
+    public void previous() {
+        cursorPosition--;
+        if (cursorPosition == -1) {
+            cursorPosition = menuEntries.size() - 1;
+        }
+        if (!select().isEnabled()) {
+            previous();
+        }
     }
 
-    public String getLabel() {
-      return label;
+    public E select() {
+        return menuEntries.get(cursorPosition);
     }
 
-  }
+    public static class Entry {
+
+        private final String label;
+        private boolean      enabled;
+
+        public Entry(final String label) {
+            this(label, true);
+        }
+
+        public Entry(final String label, final boolean enabled) {
+            this.label = label;
+            this.enabled = enabled;
+        }
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public String getLabel() {
+            return label;
+        }
+
+    }
 
 }

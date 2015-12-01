@@ -6,53 +6,53 @@
  */
 package de.hauschild.ff7rl.assets;
 
-import com.google.common.collect.Maps;
+import java.io.InputStream;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.InputStream;
-import java.util.Map;
+import com.google.common.collect.Maps;
 
 /**
  * @author Klaus Hauschild
  */
-public class Sounds {
+public enum Sounds {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(Sounds.class);
+    ;
 
-  private static final Map<String, Sound> SOUNDS = Maps.newHashMap();
-  private static boolean MUTE = false;
+    private static final Logger             LOGGER = LoggerFactory.getLogger(Sounds.class);
 
-  private Sounds() {
-  }
+    private static final Map<String, Sound> SOUNDS = Maps.newHashMap();
+    private static boolean                  MUTE   = false;
 
-  public static Sound getSound(final String soundName) {
-    LOGGER.debug("Requesting sound [{}]", soundName);
-    Sound sound = SOUNDS.get(soundName);
-    if (sound == null) {
-      sound = loadSound(soundName);
+    public static Sound getSound(final String soundName) {
+        LOGGER.debug("Requesting sound [{}]", soundName);
+        Sound sound = SOUNDS.get(soundName);
+        if (sound == null) {
+            sound = loadSound(soundName);
+        }
+        return sound;
     }
-    return sound;
-  }
 
-  private static Sound loadSound(final String soundName) {
-    if (MUTE) {
-      return new MutedSound();
+    private static Sound loadSound(final String soundName) {
+        if (MUTE) {
+            return new MutedSound();
+        }
+        LOGGER.debug("Load sound [{}]", soundName);
+        try {
+            final InputStream inputStream = Resources.getInputStream("assets/sounds", soundName).openInputStream();
+            final Sound sound = new JavaXSoundSampledSound(inputStream);
+            SOUNDS.put(soundName, sound);
+            return sound;
+        } catch (final Exception exception) {
+            throw new RuntimeException(String.format("Unable to load sound [%s].", soundName), exception);
+        }
     }
-    LOGGER.debug("Load sound [{}]", soundName);
-    try {
-      final InputStream inputStream = Resources.getInputStream("assets/sounds", soundName).openInputStream();
-      final Sound sound = new JavaXSoundSampledSound(inputStream);
-      SOUNDS.put(soundName, sound);
-      return sound;
-    } catch (final Exception exception) {
-      throw new RuntimeException(String.format("Unable to load sound [%s].", soundName), exception);
-    }
-  }
 
-  public static void mute() {
-    MUTE = true;
-    LOGGER.info("Game is muted.");
-  }
+    public static void mute() {
+        MUTE = true;
+        LOGGER.info("Game is muted.");
+    }
 
 }

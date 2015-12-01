@@ -11,23 +11,23 @@ package de.hauschild.ff7rl.state;
  */
 public class StateHandler {
 
-  private StateType nextStateType;
-  private Integer millis;
+    private StateType nextStateType;
+    private Integer   millis;
 
-  public Integer getMillis() {
-    return millis;
-  }
+    public Integer getMillis() {
+        return millis;
+    }
 
-  public StateType getNextStateType() {
-    return nextStateType;
-  }
+    public StateType getNextStateType() {
+        return nextStateType;
+    }
 
-  public void nextState(final StateType nextStateType) {
-    this.nextStateType = nextStateType;
-  }
+    public void nextState(final StateType nextStateType) {
+        this.nextStateType = nextStateType;
+    }
 
-  public void skipNextInput(final Integer millis) {
-    this.millis = millis;
-  }
+    public void skipNextInput(final Integer millis) {
+        this.millis = millis;
+    }
 
 }

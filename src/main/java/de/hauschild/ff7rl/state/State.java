@@ -14,14 +14,14 @@ import de.hauschild.ff7rl.input.Input;
  */
 public interface State {
 
-  StateType getType();
+    StateType getType();
 
-  void enter();
+    void enter();
 
-  void display(Screen screen);
+    void display(Screen screen);
 
-  void input(Input input, StateHandler stateHandler);
+    void input(Input input, StateHandler stateHandler);
 
-  void leave();
+    void leave();
 
 }

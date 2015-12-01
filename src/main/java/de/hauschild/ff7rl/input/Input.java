@@ -11,20 +11,20 @@ package de.hauschild.ff7rl.input;
  */
 public enum Input {
 
-  UP,
+    UP,
 
-  DOWN,
+    DOWN,
 
-  RIGHT,
+    RIGHT,
 
-  LEFT,
+    LEFT,
 
-  ACCEPT,
+    ACCEPT,
 
-  ABORT,
+    ABORT,
 
-  MENU,
+    MENU,
 
-  DEBUG_CONSOLE,
+    DEBUG_CONSOLE,
 
 }

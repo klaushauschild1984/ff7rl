@@ -11,9 +11,10 @@ package de.hauschild.ff7rl.assets;
  */
 public interface Sound {
 
-  void loop();
+    void loop();
 
-  void start();
+    void start();
 
-  void stop();
+    void stop();
+
 }

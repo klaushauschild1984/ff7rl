@@ -6,43 +6,43 @@
  */
 package de.hauschild.ff7rl.assets;
 
-import com.google.common.collect.Sets;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
+
+import com.google.common.collect.Sets;
 
 /**
  * @author Klaus Hauschild
  */
 public class CollectiveInputStreamProvider implements InputStreamProvider {
 
-  private final String resourcePath;
-  private final Set<InputStream> inputStreams = Sets.newHashSet();
+    private final String           resourcePath;
+    private final Set<InputStream> inputStreams = Sets.newHashSet();
 
-  public CollectiveInputStreamProvider(final String resourcePath) {
-    this.resourcePath = resourcePath;
-  }
-
-  @Override
-  public InputStream openInputStream() {
-    final InputStream inputStream = ClassLoader.getSystemResourceAsStream(resourcePath);
-    if (inputStream == null) {
-      throw new RuntimeException(String.format("Unable to open resource [%s].", this));
+    public CollectiveInputStreamProvider(final String resourcePath) {
+        this.resourcePath = resourcePath;
     }
-    inputStreams.add(inputStream);
-    return inputStream;
-  }
 
-  @Override
-  public void close() throws IOException {
-    for (final InputStream inputStream : inputStreams) {
-      inputStream.close();
+    @Override
+    public InputStream openInputStream() {
+        final InputStream inputStream = ClassLoader.getSystemResourceAsStream(resourcePath);
+        if (inputStream == null) {
+            throw new RuntimeException(String.format("Unable to open resource [%s].", this));
+        }
+        inputStreams.add(inputStream);
+        return inputStream;
     }
-  }
 
-  @Override
-  public String toString() {
-    return String.format("%s (%s)", resourcePath, inputStreams.size());
-  }
+    @Override
+    public void close() throws IOException {
+        for (final InputStream inputStream : inputStreams) {
+            inputStream.close();
+        }
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s (%s)", resourcePath, inputStreams.size());
+    }
 }
