@@ -31,22 +31,23 @@ public enum Sounds {
         Sound sound = SOUNDS.get(soundName);
         if (sound == null) {
             sound = loadSound(soundName);
+            SOUNDS.put(soundName, sound);
+        }
+        if (MUTE) {
+            return new MutedSound();
         }
         return sound;
     }
 
     private static Sound loadSound(final String soundName) {
-        if (MUTE) {
-            return new MutedSound();
-        }
         LOGGER.debug("Load sound [{}]", soundName);
         try {
             final InputStream inputStream = Resources.getInputStream("assets/sounds", soundName).openInputStream();
             final Sound sound = new JavaXSoundSampledSound(inputStream);
-            SOUNDS.put(soundName, sound);
             return sound;
         } catch (final Exception exception) {
-            throw new RuntimeException(String.format("Unable to load sound [%s].", soundName), exception);
+            LOGGER.error(String.format("Unable to load sound [%s].", soundName), exception);
+            return new MutedSound();
         }
     }
 

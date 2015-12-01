@@ -43,6 +43,11 @@ public class CollectiveInputStreamProvider implements InputStreamProvider {
 
     @Override
     public String toString() {
-        return String.format("%s (%s)", resourcePath, inputStreams.size());
+        StringBuilder builder = new StringBuilder();
+        builder.append(resourcePath);
+        if (!inputStreams.isEmpty()) {
+            builder.append(String.format(" (%s)", inputStreams.size()));
+        }
+        return builder.toString();
     }
 }

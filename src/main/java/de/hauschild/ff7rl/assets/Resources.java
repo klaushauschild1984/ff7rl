@@ -16,7 +16,9 @@ import com.google.common.collect.Maps;
 /**
  * @author Klaus Hauschild
  */
-public class Resources {
+public enum Resources {
+
+    ;
 
     private static final Logger                           LOGGER    = LoggerFactory.getLogger(Resources.class);
 
@@ -33,9 +35,6 @@ public class Resources {
                 }
             }
         }, Resources.class.getSimpleName()));
-    }
-
-    private Resources() {
     }
 
     public static InputStreamProvider getInputStream(final String assetPath, final String resourceName) {
