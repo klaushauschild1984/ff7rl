@@ -172,7 +172,7 @@
                                 </manifest>
                             </archive>
                             <appendAssemblyId>false</appendAssemblyId>
-                            <finalName>${project.name}-${project.version}-${buildNumber}</finalName>
+                            <finalName>${project.artifactId}-${project.version}-${buildNumber}</finalName>
                         </configuration>
                     </execution>
                 </executions>
