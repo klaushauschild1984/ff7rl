@@ -93,11 +93,12 @@ public class InputMapping {
                     Joiner.on(",").join(Iterables.transform(keyStrokes, keyStroke -> KeyStrokes.toString(keyStroke.getKey()))));
         }
         try (final BufferedWriter writer = Files.newWriter(INPUT_MAPPING_FILE, Charsets.UTF_8)) {
-            final String comments = "Use this file to customize the your mappings.\n"
-                    + "One command can be mapped to multiple input. Multiple inputs has to be separated by comma (,).\n"
-                    + "For a key combination with [Ctrl] prefix the input with \"Ctrl+\". For a key combination with [Alt] prefix the input with \"Alt+\".\n"
-                    + "Each combination of \"Ctrl+\" and \"Alt+\" is possible.\n"
-                    + "An input is a printable character in lowercase or uppercase or one of the following special keys (note that not all keyboards support all special keys):\n"
+            final String comments = " Use this file to customize the your mappings.\n"
+                    + " One command can be mapped to multiple input. Multiple inputs has to be separated by comma (,).\n"
+                    + " For a key combination with [Ctrl] prefix the input with \"Ctrl+\". For a key combination with [Alt] prefix the input with \"Alt+\".\n"
+                    + " Each combination of \"Ctrl+\" and \"Alt+\" is possible.\n"
+                    + " An input is a printable character in lowercase or uppercase or one of the following special keys (note that not all keyboards support all special keys):\n"
+                    + " "
                     + Joiner.on(",").join(
                             Iterables.transform(
                                     Iterables.filter(Arrays.asList(KeyType.values()), keyType -> keyType != KeyType.Character
