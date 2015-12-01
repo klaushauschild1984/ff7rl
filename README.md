@@ -39,5 +39,5 @@
 - [Klaus Hauschild](mailto:klaus.hauschild.1984@gmail.com)
 
 ## Project status
-[![Build Status](https://travis-ci.org/klaushauschild1984/ff7rl.svg?branch=master)](https://travis-ci.org/klaushauschild1984/ff7rl)
-[![Build Quality](https://scan.coverity.com/projects/7152/badge.svg)](https://scan.coverity.com/projects/klaushauschild1984-ff7rl)
+- [![Build Status](https://travis-ci.org/klaushauschild1984/ff7rl.svg?branch=master)](https://travis-ci.org/klaushauschild1984/ff7rl)
+- [![Build Quality](https://scan.coverity.com/projects/7152/badge.svg)](https://scan.coverity.com/projects/klaushauschild1984-ff7rl)
