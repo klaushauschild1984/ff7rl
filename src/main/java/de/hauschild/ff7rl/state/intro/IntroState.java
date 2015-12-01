@@ -55,7 +55,7 @@ public class IntroState extends AbstractState {
         } catch (final Exception exception) {
             throw new RuntimeException("Unable to read title graphic.", exception);
         }
-        introSound = Sounds.getSound("Prelude.mp3");
+        introSound = Sounds.getSound("1-01 Prelude.mp3");
         introSound.start();
         final ScreenMenu.Entry newGameEntry = new ScreenMenu.Entry("New Game");
         final ScreenMenu.Entry continueEntry = new ScreenMenu.Entry("Continue", false);

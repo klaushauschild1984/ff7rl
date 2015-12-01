@@ -32,7 +32,7 @@ public class BattleState extends AbstractState {
     @Override
     public void enter() {
         super.enter();
-        fightingSound = Sounds.getSound("Fighting.mp3");
+        fightingSound = Sounds.getSound("1-10 Fighting.mp3");
         fightingSound.loop();
     }
 
