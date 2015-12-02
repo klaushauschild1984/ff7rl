@@ -6,38 +6,37 @@
  */
 package de.hauschild.ff7rl.state.intro;
 
+import com.google.common.collect.Lists;
+import com.googlecode.lanterna.screen.Screen;
+import de.hauschild.ff7rl.Context;
+import de.hauschild.ff7rl.assets.Resources;
+import de.hauschild.ff7rl.assets.sounds.Sound;
+import de.hauschild.ff7rl.assets.sounds.Sounds;
+import de.hauschild.ff7rl.input.Input;
+import de.hauschild.ff7rl.state.AbstractState;
+import de.hauschild.ff7rl.state.StateHandler;
+import de.hauschild.ff7rl.state.StateType;
+import de.hauschild.ff7rl.ui.ScreenMenu;
+import de.hauschild.ff7rl.ui.ScreenMenu.Entry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.google.common.collect.Lists;
-import com.googlecode.lanterna.screen.Screen;
-
-import de.hauschild.ff7rl.Context;
-import de.hauschild.ff7rl.assets.Resources;
-import de.hauschild.ff7rl.assets.Sound;
-import de.hauschild.ff7rl.assets.Sounds;
-import de.hauschild.ff7rl.input.Input;
-import de.hauschild.ff7rl.state.AbstractState;
-import de.hauschild.ff7rl.state.StateHandler;
-import de.hauschild.ff7rl.state.StateType;
-import de.hauschild.ff7rl.ui.ScreenMenu;
-
 /**
  * @author Klaus Hauschild
  */
 public class IntroState extends AbstractState {
 
-    private static final Logger          LOGGER = LoggerFactory.getLogger(IntroState.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(IntroState.class);
 
-    private final List<String>           title  = Lists.newArrayList();
-    private Sound                        introSound;
-    private ScreenMenu<ScreenMenu.Entry> mainMenu;
+    private final List<String>  title  = Lists.newArrayList();
+    private Sound               introSound;
+    private ScreenMenu<Entry>   mainMenu;
 
     public IntroState(final Context context) {
         super(StateType.INTRO, context);
@@ -57,9 +56,9 @@ public class IntroState extends AbstractState {
         }
         introSound = Sounds.getSound("1-01 Prelude.mp3");
         introSound.start();
-        final ScreenMenu.Entry newGameEntry = new ScreenMenu.Entry("New Game");
-        final ScreenMenu.Entry continueEntry = new ScreenMenu.Entry("Continue", false);
-        final ScreenMenu.Entry bossRushEntry = new ScreenMenu.Entry("Boss Rush");
+        final Entry newGameEntry = new Entry("New Game");
+        final Entry continueEntry = new Entry("Continue", false);
+        final Entry bossRushEntry = new Entry("Boss Rush");
         mainMenu = new ScreenMenu<>(Lists.newArrayList(newGameEntry, continueEntry, bossRushEntry), 35, 50);
     }
 

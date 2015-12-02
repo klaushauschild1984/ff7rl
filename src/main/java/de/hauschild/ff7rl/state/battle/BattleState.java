@@ -10,8 +10,8 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.screen.Screen;
 
 import de.hauschild.ff7rl.Context;
-import de.hauschild.ff7rl.assets.Sound;
-import de.hauschild.ff7rl.assets.Sounds;
+import de.hauschild.ff7rl.assets.sounds.Sound;
+import de.hauschild.ff7rl.assets.sounds.Sounds;
 import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.state.AbstractState;
 import de.hauschild.ff7rl.state.StateHandler;

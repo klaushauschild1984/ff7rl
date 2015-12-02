@@ -6,19 +6,7 @@
  */
 package de.hauschild.ff7rl.debug;
 
-import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
-import javax.swing.*;
-import javax.swing.text.DefaultCaret;
-
 import com.google.common.base.MoreObjects;
-
 import de.hauschild.ff7rl.state.State;
 import groovy.lang.Binding;
 import groovy.lang.GroovyRuntimeException;
@@ -26,30 +14,39 @@ import groovy.lang.GroovyShell;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
+import javax.swing.text.DefaultCaret;
+import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
 /**
  * @author Klaus Hauschild
  */
 public class Console extends JFrame {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Console.class);
+    private static final Logger LOGGER       = LoggerFactory.getLogger(Console.class);
 
-    private static boolean     ENABLED      = false;
-    private static boolean     OPENED       = false;
-    private static Binding     CONSOLE_BINDING;
-    private final JTextArea    output       = new JTextArea();
-    private final JTextField   input        = new JTextField();
-    private final InputHistory inputHistory = new InputHistory();
+    private static boolean      ENABLED      = false;
+    private static boolean      OPENED       = false;
+    private static Binding      CONSOLE_BINDING;
+
+    private final JTextArea     output       = new JTextArea();
+    private final JTextField    input        = new JTextField();
+    private final InputHistory  inputHistory = new InputHistory();
 
     private Console() {
         super("Debug Console");
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         setUndecorated(true);
         add(input, BorderLayout.SOUTH);
         add(new JScrollPane(output), BorderLayout.CENTER);
         setSize(800, 600);
         final Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation(screenSize.width - getWidth(), screenSize.height - getHeight() - 40);
-        DefaultCaret caret = (DefaultCaret)output.getCaret();
+        DefaultCaret caret = (DefaultCaret) output.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         output.setEditable(false);
         output.setFocusable(false);

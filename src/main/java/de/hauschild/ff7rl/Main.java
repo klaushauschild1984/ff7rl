@@ -6,29 +6,25 @@
  */
 package de.hauschild.ff7rl;
 
-import javax.swing.*;
-
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import ch.qos.logback.classic.Level;
-
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
-
-import de.hauschild.ff7rl.assets.Sounds;
+import de.hauschild.ff7rl.assets.sounds.Sounds;
 import de.hauschild.ff7rl.debug.Console;
 import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.input.InputMapping;
 import de.hauschild.ff7rl.state.State;
 import de.hauschild.ff7rl.state.StateHandler;
 import de.hauschild.ff7rl.state.StateType;
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.swing.*;
 
 /**
  * @author Klaus Hauschild
