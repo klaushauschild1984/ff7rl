@@ -2,17 +2,3 @@ language: java
 
 jdk:
   - oraclejdk8
-
-env:
-  global:
-   - secure: "r1458dlruwM9/Rr8VROULBx2KAha05x8kqfWGgheYrGYilLGYCYlsv2F1Izs0H4G2dIDrem8UjJOE0OaES+NSd26MieMAt1fKC76Dw1HJFeqKX+kCg95b0VYuqo1eQP2CYx/sr1vwJaiP9OgylVciWVMTvukXqNc/pIi8DgHOjvBmohgn6xx2vnnUOIlg+6rWe4Cr+TkkfAvlK1nRBT8sB5HhFqk7NYkTLgtgUyrvhzhvpHUVTo3MfzUiUamksxaZ9K+eKs40HvOcwZ85MUdIi0q7sCy0u12AcPYVvagNqnuvMRCZng/QaznHjeb98L6xIQRdXim9yuG6zYklsi4SkJwwLzW87fUEHl5JiI7odXgC3Hbdt/ZtgHQhYFGROybWNhR3LWlfRXLs6GQMI0qnas34l+t1wR62m6bWsDW8R82iuLcVGu/h7wQw8f5EzXLmjj2zO8UHsPAMznK4+JW7FhVAN4OGPoWpVIwX/a23e9ovZ2EFG5tLm9sJwLHnO0b4BdjOA+Wj6zr3S4BQjaGAgJgdTEPCqrFtmYZ5fbfouxW0C2V+efxxQnmVDQ3Rdk2sp2dE0g2bLiFNXfHDonvr/CzwKiYo2jQQqoT+Dc7vMPf1rDCJSowHrJMaxTG33pMsUh1daG37cSqgi9rB+UDha1f8Rzc2UyctmbBc33XSbk="
-
-addons:
-  coverity_scan:
-    project:
-      name: "klaushauschild1984/ff7rl"
-      description: "Build submitted via Travis CI"
-    notification_email: klaus.hauschild.1984@gmail.com
-    build_command_prepend: "mvn clean"
-    build_command:   "mvn -DskipTests=true compile"
-    branch_pattern: master
