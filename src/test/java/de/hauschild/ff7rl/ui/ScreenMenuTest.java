@@ -6,13 +6,12 @@
  */
 package de.hauschild.ff7rl.ui;
 
-import static org.testng.Assert.assertEquals;
+import com.google.common.collect.Lists;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
-import org.testng.annotations.Test;
-
-import com.google.common.collect.Lists;
+import static org.testng.Assert.assertEquals;
 
 /**
  * @author Klaus Hauschild

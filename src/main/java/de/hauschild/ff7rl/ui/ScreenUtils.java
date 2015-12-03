@@ -16,6 +16,10 @@ public class ScreenUtils {
     private ScreenUtils() {
     }
 
+    /**
+     * @deprecated TODO make this a ui component
+     */
+    @Deprecated
     public static void renderBox(final TextGraphics textGraphics, final int top, final int left, final int width, final int height) {
         // place corners
         textGraphics.putString(left, top, "+");

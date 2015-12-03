@@ -6,18 +6,8 @@
  */
 package de.hauschild.ff7rl.state.intro;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.google.common.collect.Lists;
 import com.googlecode.lanterna.screen.Screen;
-
 import de.hauschild.ff7rl.Context;
 import de.hauschild.ff7rl.assets.Resources;
 import de.hauschild.ff7rl.assets.sounds.Sound;
@@ -28,6 +18,14 @@ import de.hauschild.ff7rl.state.StateHandler;
 import de.hauschild.ff7rl.state.StateType;
 import de.hauschild.ff7rl.ui.ScreenMenu;
 import de.hauschild.ff7rl.ui.ScreenMenu.Entry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 /**
  * @author Klaus Hauschild

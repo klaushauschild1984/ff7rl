@@ -6,13 +6,9 @@
  */
 package de.hauschild.ff7rl.assets.sounds;
 
-import java.io.InputStream;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import de.hauschild.ff7rl.assets.Resources;
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
 import org.reflections.util.ClasspathHelper;
@@ -20,10 +16,12 @@ import org.reflections.util.ConfigurationBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-
-import de.hauschild.ff7rl.assets.Resources;
+import java.io.InputStream;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * @author Klaus Hauschild
@@ -32,10 +30,9 @@ public enum Sounds {
 
     ;
 
-    public static final String              SOUND_ASSETS__PATH = "assets/sounds";
-
     private static final Logger             LOGGER             = LoggerFactory.getLogger(Sounds.class);
 
+    private static final String             SOUND_ASSETS__PATH = "assets/sounds";
     private static final Map<String, Sound> SOUNDS             = Maps.newHashMap();
     private static final Reflections        REFLECTIONS        = new Reflections(new ConfigurationBuilder().setUrls(
                                                                        ClasspathHelper.forClassLoader()).setScanners(
@@ -65,8 +62,7 @@ public enum Sounds {
         LOGGER.debug("Load sound [{}]", soundName);
         try {
             final InputStream inputStream = Resources.getInputStream(SOUND_ASSETS__PATH, soundName).openInputStream();
-            final Sound sound = new JavaXSoundSampledSound(inputStream);
-            return sound;
+            return new JavaXSoundSampledSound(inputStream);
         } catch (final Exception exception) {
             LOGGER.error(String.format("Unable to load sound [%s].", soundName), exception);
             return new MutedSound();

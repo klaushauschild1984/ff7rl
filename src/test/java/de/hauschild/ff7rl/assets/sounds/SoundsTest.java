@@ -6,6 +6,7 @@
  */
 package de.hauschild.ff7rl.assets.sounds;
 
+import de.hauschild.ff7rl.Threads;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertEquals;
@@ -19,11 +20,11 @@ public class SoundsTest {
 
     // TODO enable test some day
     @Test(enabled = false)
-    public void playSoundTest() throws Exception {
+    public void playSoundTest() {
         final Sound sound = Sounds.getSound("1-01 Prelude.mp3");
         assertNotEquals(sound.getClass(), MutedSound.class);
         sound.start();
-        Thread.sleep(1000 * 5);
+        Threads.sleep(1000 * 5);
         sound.stop();
     }
 

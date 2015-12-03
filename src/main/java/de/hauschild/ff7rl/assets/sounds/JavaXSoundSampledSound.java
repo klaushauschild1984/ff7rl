@@ -6,12 +6,11 @@
  */
 package de.hauschild.ff7rl.assets.sounds;
 
-import java.io.InputStream;
-
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import java.io.InputStream;
 
 /**
  * @author Klaus Hauschild
@@ -30,13 +29,18 @@ public class JavaXSoundSampledSound implements Sound {
     }
 
     @Override
+    public boolean isPlaying() {
+        return clip.isActive();
+    }
+
+    @Override
     public void loop() {
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
     @Override
     public void start() {
-        if (clip.isActive()) {
+        if (isPlaying()) {
             return;
         }
         clip.start();
@@ -44,7 +48,13 @@ public class JavaXSoundSampledSound implements Sound {
 
     @Override
     public void stop() {
-        if (!clip.isActive()) {
+        pause();
+        clip.setFramePosition(0);
+    }
+
+    @Override
+    public void pause() {
+        if (!isPlaying()) {
             return;
         }
         clip.stop();

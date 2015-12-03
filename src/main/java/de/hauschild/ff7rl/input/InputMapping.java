@@ -6,15 +6,6 @@
  */
 package de.hauschild.ff7rl.input;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
@@ -25,6 +16,15 @@ import com.google.common.collect.Maps;
 import com.google.common.io.Files;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Properties;
 
 /**
  * @author Klaus Hauschild
@@ -84,6 +84,7 @@ public class InputMapping {
         }
     }
 
+    // TODO replace Iterables calls by stream API
     private void writeInputMapping() {
         final Properties inputMappings = new Properties();
         for (final Input input : Input.values()) {

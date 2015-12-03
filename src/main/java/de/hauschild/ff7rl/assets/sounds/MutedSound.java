@@ -12,6 +12,11 @@ package de.hauschild.ff7rl.assets.sounds;
 public class MutedSound implements Sound {
 
     @Override
+    public boolean isPlaying() {
+        return false;
+    }
+
+    @Override
     public void loop() {
         // nothing to do
     }
@@ -26,4 +31,8 @@ public class MutedSound implements Sound {
         // nothing to do
     }
 
+    @Override
+    public void pause() {
+        // nothing to do
+    }
 }

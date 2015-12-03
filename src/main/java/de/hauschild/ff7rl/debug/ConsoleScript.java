@@ -6,13 +6,13 @@
  */
 package de.hauschild.ff7rl.debug;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import groovy.lang.Script;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * @author Klaus Hauschild
@@ -21,7 +21,7 @@ public class ConsoleScript extends Script {
 
     public String describe(final Object object) {
         final StringBuilder builder = new StringBuilder();
-        builder.append(object.getClass().getName() + ":");
+        builder.append(object.getClass().getName()).append(":");
         for (final Field field : ConsoleScriptHelper.getFields(object)) {
             builder.append("\n  ");
             builder.append(field.getName());

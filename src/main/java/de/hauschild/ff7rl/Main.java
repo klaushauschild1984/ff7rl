@@ -25,6 +25,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
+import java.io.IOException;
 
 /**
  * @author Klaus Hauschild
@@ -33,12 +34,14 @@ enum Main {
 
     ;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
+    private static final Logger LOGGER       = LoggerFactory.getLogger(Main.class);
+
+    private static StateType    initialState = StateType.INTRO;
 
     public static void main(final String[] args) {
         processArguments(args);
         final DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
-        terminalFactory.setSwingTerminalFrameTitle(String.format("Final Fantasy 7 - Roguelike (%s)", Version.get()));
+        terminalFactory.setSwingTerminalFrameTitle(String.format("Final Fantasy 7 roguelike (%s)", Version.get()));
         terminalFactory.setInitialTerminalSize(new TerminalSize(120, 48));
         final SwingTerminalFrame terminal = getTerminal(terminalFactory);
         terminal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -55,9 +58,12 @@ enum Main {
     private static void processArguments(final String[] args) {
         final OptionParser optionParser = new OptionParser();
         final String muteOption = "mute";
-        final String debugOption = "debug";
         optionParser.accepts(muteOption, "Mutes the hole game.");
-        optionParser.accepts(debugOption, "Active the debug mode (logging, debug console)");
+        final String debugOption = "debug";
+        optionParser.accepts(debugOption, "Active the debug mode (logging, debug console, debug options)");
+        final String initialStateOption = "initialState";
+        optionParser.accepts(initialStateOption, "[only evaluated with --debug] specifies the initial game state")
+                .withRequiredArg();
         final OptionSet options = optionParser.parse(args);
         if (options.has(muteOption)) {
             Sounds.mute();
@@ -65,6 +71,9 @@ enum Main {
         if (options.has(debugOption)) {
             Console.enableDebugConsole();
             setLogLevel(Level.DEBUG);
+            if (options.has(initialStateOption) && options.hasArgument(initialStateOption)) {
+                initialState = StateType.valueOf((String) options.valueOf(initialStateOption));
+            }
         } else {
             setLogLevel(Level.OFF);
         }
@@ -91,41 +100,61 @@ enum Main {
         // initialize context
         final Context context = Context.createStartContext();
         // initialize state
-        State state = StateType.INTRO.getState(context);
+        State state = initialState.getState(context);
         state.enter();
         boolean skipNextInput = false;
         while (true) {
-            // display state
-            screen.clear();
-            state.display(screen);
-            screen.refresh();
+            // update display
+            displayState(screen, state);
+            // get next input
+            Input input = getInput(screen, inputMapping, state, skipNextInput);
             // update state
-            Input input;
-            if (skipNextInput) {
-                skipNextInput = false;
-                input = null;
-            } else {
-                input = inputMapping.map(screen.readInput());
-            }
-            if (input == Input.DEBUG_CONSOLE) {
-                Console.openDebugConsole(state);
-                input = inputMapping.map(screen.readInput());
-            }
             final StateHandler stateHandler = new StateHandler();
             state.input(input, stateHandler);
-            final StateType nextStateType = stateHandler.getNextStateType();
-            if (nextStateType != null) {
-                state.leave();
-                state = nextStateType.getState(context);
-                state.enter();
-                Console.rebind(state);
-            }
-            final Integer skipNextInputMillis = stateHandler.getMillis();
-            if (skipNextInputMillis != null) {
-                skipNextInput = true;
-                Thread.sleep(skipNextInputMillis);
-            }
+            // handle next state
+            state = handleNextState(context, state, stateHandler);
+            // sleep if previous state requires it
+            skipNextInput = sleepIfNecessary(stateHandler);
         }
+    }
+
+    private static State handleNextState(Context context, State state, StateHandler stateHandler) {
+        final StateType nextStateType = stateHandler.getNextStateType();
+        if (nextStateType != null) {
+            state.leave();
+            state = nextStateType.getState(context);
+            state.enter();
+            Console.rebind(state);
+        }
+        return state;
+    }
+
+    private static Input getInput(Screen screen, InputMapping inputMapping, State state, boolean skipNextInput)
+            throws IOException {
+        if (skipNextInput) {
+            return null;
+        }
+        Input input = inputMapping.map(screen.readInput());
+        if (input == Input.DEBUG_CONSOLE) {
+            Console.openDebugConsole(state);
+            input = inputMapping.map(screen.readInput());
+        }
+        return input;
+    }
+
+    private static void displayState(Screen screen, State state) throws IOException {
+        screen.clear();
+        state.display(screen);
+        screen.refresh();
+    }
+
+    private static boolean sleepIfNecessary(final StateHandler stateHandler) {
+        final Integer skipNextInputMillis = stateHandler.getMillis();
+        if (skipNextInputMillis != null) {
+            Threads.sleep(skipNextInputMillis);
+            return true;
+        }
+        return false;
     }
 
 }

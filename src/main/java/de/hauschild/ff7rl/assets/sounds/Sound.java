@@ -11,10 +11,14 @@ package de.hauschild.ff7rl.assets.sounds;
  */
 public interface Sound {
 
+    boolean isPlaying();
+
     void loop();
 
     void start();
 
     void stop();
+
+    void pause();
 
 }
