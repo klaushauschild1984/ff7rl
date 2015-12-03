@@ -93,6 +93,10 @@ public class ScreenMenu<E extends ScreenMenu.Entry> {
             return label;
         }
 
+        @Override
+        public String toString() {
+            return label;
+        }
     }
 
 }

@@ -47,7 +47,7 @@ public class BattleState extends AbstractState {
     }
 
     @Override
-    public void input(final Input input, StateHandler stateHandler) {
+    public void input(final Input input, final StateHandler stateHandler) {
     }
 
     @Override

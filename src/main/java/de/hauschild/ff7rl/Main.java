@@ -29,12 +29,11 @@ import javax.swing.*;
 /**
  * @author Klaus Hauschild
  */
-class Main {
+enum Main {
+
+    ;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
-
-    private Main() {
-    }
 
     public static void main(final String[] args) {
         processArguments(args);

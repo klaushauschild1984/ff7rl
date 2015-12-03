@@ -6,33 +6,41 @@
  */
 package de.hauschild.ff7rl.state.soundtest;
 
-import com.google.common.collect.Lists;
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.regex.Pattern;
+import com.googlecode.lanterna.screen.Screen;
+
+import de.hauschild.ff7rl.Context;
+import de.hauschild.ff7rl.assets.sounds.Sounds;
+import de.hauschild.ff7rl.input.Input;
+import de.hauschild.ff7rl.state.AbstractState;
+import de.hauschild.ff7rl.state.StateHandler;
+import de.hauschild.ff7rl.state.StateType;
 
 /**
  * @author Klaus Hauschild
  */
-public class SoundTestState {
+public class SoundTestState extends AbstractState {
 
-    private static final Reflections reflections = new Reflections(new ConfigurationBuilder().setUrls(
-                                                         ClasspathHelper.forClassLoader()).setScanners(new ResourcesScanner()));
+    private static final Logger LOGGER = LoggerFactory.getLogger(SoundTestState.class);
 
-    private static List<String> getAllSounds() {
-        final List<String> sounds = Lists.newArrayList(reflections.getResources(Pattern.compile(".*\\.mp3")));
-        Collections.sort(sounds);
-        return sounds;
+    public SoundTestState(final Context context) {
+        super(StateType.SOUND_TEST, context);
+        Sounds.getAllSounds().forEach(sound -> LOGGER.debug(sound));
     }
 
-    public static void main(final String[] args) {
-        final List<String> sounds = getAllSounds();
-        System.out.println(sounds.size());
+    @Override
+    public void display(final Screen screen) {
+    }
+
+    @Override
+    public void input(final Input input, final StateHandler stateHandler) {
+        switch (input) {
+            case ABORT:
+                stateHandler.nextState(StateType.INTRO);
+                break;
+        }
     }
 
 }

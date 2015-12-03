@@ -13,6 +13,7 @@ import com.google.common.collect.Maps;
 import de.hauschild.ff7rl.Context;
 import de.hauschild.ff7rl.state.battle.BattleState;
 import de.hauschild.ff7rl.state.intro.IntroState;
+import de.hauschild.ff7rl.state.soundtest.SoundTestState;
 
 /**
  * @author Klaus Hauschild
@@ -31,7 +32,7 @@ public enum StateType {
 
     BATTLE(BattleState.class),
 
-    ;
+    SOUND_TEST(SoundTestState.class);
 
     private static final Map<StateType, State> STATES = Maps.newEnumMap(StateType.class);
 
