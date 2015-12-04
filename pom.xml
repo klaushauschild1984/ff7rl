@@ -246,7 +246,9 @@
                     </plugin>
                 </plugins>
             </build>
+            <properties>
+                <skipTests>true</skipTests>
+            </properties>
         </profile>
     </profiles>
-
 </project>
