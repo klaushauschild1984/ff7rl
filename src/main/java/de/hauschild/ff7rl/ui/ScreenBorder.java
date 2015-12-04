@@ -7,20 +7,27 @@
 package de.hauschild.ff7rl.ui;
 
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.Screen;
 
 /**
  * @author Klaus Hauschild
  */
-public class ScreenUtils {
+public class ScreenBorder {
 
-    private ScreenUtils() {
+    private final int top;
+    private final int left;
+    private final int width;
+    private final int height;
+
+    public ScreenBorder(final int top, final int left, final int width, final int height) {
+        this.top = top;
+        this.left = left;
+        this.width = width;
+        this.height = height;
     }
 
-    /**
-     * @deprecated TODO make this a ui component
-     */
-    @Deprecated
-    public static void renderBox(final TextGraphics textGraphics, final int top, final int left, final int width, final int height) {
+    public void display(final Screen screen) {
+        TextGraphics textGraphics = screen.newTextGraphics();
         // place corners
         textGraphics.putString(left, top, "+");
         textGraphics.putString(left + width, top, "+");

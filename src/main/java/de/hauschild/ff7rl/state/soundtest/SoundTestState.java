@@ -15,9 +15,9 @@ import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.state.AbstractState;
 import de.hauschild.ff7rl.state.StateHandler;
 import de.hauschild.ff7rl.state.StateType;
+import de.hauschild.ff7rl.ui.ScreenBorder;
 import de.hauschild.ff7rl.ui.ScreenMenu;
 import de.hauschild.ff7rl.ui.ScreenMenu.Entry;
-import de.hauschild.ff7rl.ui.ScreenUtils;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -50,8 +50,7 @@ public class SoundTestState extends AbstractState {
 
     @Override
     public void display(final Screen screen) {
-        // TODO add border
-        ScreenUtils.renderBox(screen.newTextGraphics(), 1, 17, 82, 4);
+        new ScreenBorder(1, 17, 82, 4).display(screen);
         screen.newTextGraphics().putString(19, 3,
                 String.format("[LEFT] CD %s [RIGHT] | [UP] Track [DOWN] | [ACCEPT] play/stop | [MENU] auto play", cd));
         getCdMenu().display(screen);

@@ -6,18 +6,17 @@
  */
 package de.hauschild.ff7rl.debug;
 
+import com.google.common.collect.ImmutableSet;
+import groovy.lang.GroovyObjectSupport;
+import groovy.lang.Script;
+import org.codehaus.groovy.control.CompilerConfiguration;
+import org.reflections.ReflectionUtils;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Set;
-
-import org.codehaus.groovy.control.CompilerConfiguration;
-
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
-
-import groovy.lang.GroovyObjectSupport;
-import groovy.lang.Script;
+import java.util.stream.Collectors;
 
 /**
  * @author Klaus Hauschild
@@ -37,27 +36,21 @@ enum ConsoleScriptHelper {
     }
 
     public static List<Field> getFields(final Object object) {
-        final List<Field> fields = Lists.newArrayList();
-        // TODO optimize field access: ReflectionUtils.doWithFields
-        for (final Field field : object.getClass().getDeclaredFields()) {
-            if (IGNORE_BY_CLASSNAME.contains(field.getDeclaringClass().getName())) {
-                continue;
-            }
-            fields.add(field);
-        }
-        return fields;
+        return ReflectionUtils
+                .getAllFields(object.getClass())
+                .stream()
+                .filter(field -> !IGNORE_BY_CLASSNAME.contains(field.getDeclaringClass().getName())
+                        && !field.getName().equals("this$0"))
+                .sorted((field1, field2) -> field1.getName().compareTo(field2.getName())).collect(Collectors.toList());
     }
 
     public static List<Method> getMethods(final Object object) {
-        final List<Method> methods = Lists.newArrayList();
-        // TODO optimize method access: ReflectionUtils.doWithMethods
-        for (final Method method : object.getClass().getMethods()) {
-            if (IGNORE_BY_CLASSNAME.contains(method.getDeclaringClass().getName())) {
-                continue;
-            }
-            methods.add(method);
-        }
-        return methods;
+        return ReflectionUtils
+                .getAllMethods(object.getClass())
+                .stream()
+                .filter(method -> !IGNORE_BY_CLASSNAME.contains(method.getDeclaringClass().getName()))
+                .sorted((method1, method2) -> method1.getName().compareTo(method2.getName()))
+                .collect(Collectors.toList());
     }
 
 }
