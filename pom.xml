@@ -163,8 +163,8 @@
     </build>
 
     <!-- More Project Information -->
-    <name>Final Fantasy 7 - roguelike</name>
-    <description>Final Fantasy 7 - roguelike</description>
+    <name>Final Fantasy 7 roguelike</name>
+    <description>Final Fantasy 7 roguelike</description>
     <url>https://github.com/klaushauschild1984/ff7rl</url>
     <inceptionYear>2015</inceptionYear>
     <developers>
@@ -232,7 +232,7 @@
                                     <goal>launch4j</goal>
                                 </goals>
                                 <configuration>
-                                    <headerType>gui</headerType>
+                                    <headerType>console</headerType>
                                     <outfile>target/${project.assemblyName}.exe</outfile>
                                     <jar>target/${project.assemblyName}.jar</jar>
                                     <jre>

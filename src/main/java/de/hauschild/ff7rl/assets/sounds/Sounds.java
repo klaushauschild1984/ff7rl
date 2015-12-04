@@ -40,6 +40,7 @@ public enum Sounds {
     private static boolean                  MUTE               = false;
 
     public static List<String> getAllSounds() {
+        // TODO this provides an empty list when started from native windows wrapper
         final List<String> sounds = Lists.newArrayList(REFLECTIONS.getResources(Pattern.compile(".*\\.mp3")));
         Collections.sort(sounds);
         return sounds.stream().map(sound -> sound.replace(Sounds.SOUND_ASSETS__PATH + "/", "")).collect(Collectors.toList());
