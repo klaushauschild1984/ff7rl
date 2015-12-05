@@ -75,6 +75,9 @@ public class IntroState extends AbstractState {
 
     @Override
     public void input(final Input input, final StateHandler stateHandler) {
+        if (input == null) {
+            return;
+        }
         switch (input) {
             case DOWN:
                 mainMenu.next();
