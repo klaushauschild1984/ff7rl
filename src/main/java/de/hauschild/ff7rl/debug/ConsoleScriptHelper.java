@@ -7,6 +7,8 @@
 package de.hauschild.ff7rl.debug;
 
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
+import groovy.lang.GroovyObject;
 import groovy.lang.GroovyObjectSupport;
 import groovy.lang.Script;
 import org.codehaus.groovy.control.CompilerConfiguration;
@@ -25,9 +27,13 @@ enum ConsoleScriptHelper {
 
     ;
 
-    private static final Set<String> IGNORE_BY_CLASSNAME = ImmutableSet.<String>builder().add(Object.class.getName())
-                                                                 .add(Script.class.getName())
-                                                                 .add(GroovyObjectSupport.class.getName()).add("Script1").build();
+    private static final Set<String> IGNORE_BY_CLASSNAME = ImmutableSet.<String>builder() //
+                                                                 .add(Object.class.getName()) //
+                                                                 .add(Script.class.getName()) //
+                                                                 .add(GroovyObject.class.getName()) //
+                                                                 .add(GroovyObjectSupport.class.getName()) //
+                                                                 .add("Script1") //
+                                                                 .build();
 
     public static CompilerConfiguration getCompilerConfiguration() {
         final CompilerConfiguration compilerConfiguration = new CompilerConfiguration();
@@ -36,20 +42,35 @@ enum ConsoleScriptHelper {
     }
 
     public static List<Field> getFields(final Object object) {
-        return ReflectionUtils
+        List<Field> fields = ReflectionUtils
                 .getAllFields(object.getClass())
                 .stream()
                 .filter(field -> !IGNORE_BY_CLASSNAME.contains(field.getDeclaringClass().getName())
                         && !field.getName().equals("this$0"))
                 .sorted((field1, field2) -> field1.getName().compareTo(field2.getName())).collect(Collectors.toList());
+        Set<String> uniqueNames = Sets.newHashSet();
+        return fields.stream().filter(field -> {
+            if (uniqueNames.contains(field.getName())) {
+                return false;
+            }
+            uniqueNames.add(field.getName());
+            return true;
+        }).collect(Collectors.toList());
     }
 
     public static List<Method> getMethods(final Object object) {
-        return ReflectionUtils
-                .getAllMethods(object.getClass())
-                .stream()
+        List<Method> methods = ReflectionUtils.getAllMethods(object.getClass()).stream()
                 .filter(method -> !IGNORE_BY_CLASSNAME.contains(method.getDeclaringClass().getName()))
-                .sorted((method1, method2) -> method1.getName().compareTo(method2.getName()))
+                .sorted((method1, method2) -> method1.getName().compareTo(method2.getName())).collect(Collectors.toList());
+        Set<String> uniqueNames = Sets.newHashSet();
+        // TODO handle overloaded methods with same name correct (now they will filtered)
+        return methods.stream().filter(method -> {
+            if (uniqueNames.contains(method.getName())) {
+                return false;
+            }
+            uniqueNames.add(method.getName());
+            return true;
+        }).filter(method -> !method.getDeclaringClass().equals(ConsoleScript.class) || !method.getName().equals("run"))
                 .collect(Collectors.toList());
     }
 
