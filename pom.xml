@@ -40,6 +40,11 @@
             <artifactId>lanterna</artifactId>
             <version>3.0.0-beta1</version>
         </dependency>
+        <dependency>
+            <groupId>com.jtattoo</groupId>
+            <artifactId>JTattoo</artifactId>
+            <version>1.6.11</version>
+        </dependency>
         <!-- /ui, terminal -->
         <!-- sound -->
         <dependency>

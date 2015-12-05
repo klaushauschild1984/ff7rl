@@ -12,6 +12,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
+import com.jtattoo.plaf.noire.NoireLookAndFeel;
 import de.hauschild.ff7rl.assets.sounds.Sounds;
 import de.hauschild.ff7rl.debug.Console;
 import de.hauschild.ff7rl.input.Input;
@@ -24,8 +25,11 @@ import joptsimple.OptionSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.*;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
 import java.io.IOException;
+import java.util.Properties;
 
 /**
  * @author Klaus Hauschild
@@ -39,6 +43,7 @@ enum Main {
     private static StateType    initialState = StateType.INTRO;
 
     public static void main(final String[] args) {
+        setupLookAndFeel();
         processArguments(args);
         final DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
         terminalFactory.setSwingTerminalFrameTitle(String.format("Final Fantasy 7 roguelike (%s)", Version.get()));
@@ -47,11 +52,24 @@ enum Main {
         terminal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         terminal.setResizable(false);
         terminal.setLocationRelativeTo(null);
+        // TODO terminal.setIconImage(null);
         try {
             mainLoop(new TerminalScreen(terminal));
         } catch (final Exception exception) {
             LOGGER.error("Unexpected error.", exception);
             System.exit(1);
+        }
+    }
+
+    private static void setupLookAndFeel() {
+        Properties props = new Properties();
+        props.put("logoString", "");
+        props.put("centerWindowTitle", true);
+        NoireLookAndFeel.setCurrentTheme(props);
+        try {
+            UIManager.setLookAndFeel(new NoireLookAndFeel());
+        } catch (UnsupportedLookAndFeelException exception) {
+            LOGGER.error("Unable to setup look and feel. Use default. Maybe the app looks at some point wired.");
         }
     }
 
