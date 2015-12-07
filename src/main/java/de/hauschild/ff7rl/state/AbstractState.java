@@ -33,12 +33,12 @@ public abstract class AbstractState implements State {
 
     @Override
     public void enter() {
-        LOGGER.debug("Enter state [{}].", this);
+        LOGGER.debug("Enter [{}] state.", this);
     }
 
     @Override
     public void leave() {
-        LOGGER.debug("Leave state [{}].", this);
+        LOGGER.debug("Leave [{}] state.", this);
     }
 
     @Override

@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * @author Klaus Hauschild
  */
+// TODO let this extend Displayable
 public class ScreenMenu<E extends ScreenMenu.Entry> {
 
     private final List<E> menuEntries;

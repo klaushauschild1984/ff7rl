@@ -12,6 +12,7 @@ import com.googlecode.lanterna.screen.Screen;
 /**
  * @author Klaus Hauschild
  */
+// TODO let this extend Displayable
 public class ScreenBorder {
 
     private final int top;
