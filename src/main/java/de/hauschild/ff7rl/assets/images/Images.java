@@ -13,6 +13,7 @@ import de.hauschild.ff7rl.assets.Resources;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.ParametersAreNonnullByDefault;
 import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -50,7 +51,8 @@ public enum Images {
         private static final String IMAGES_ASSETS__PATH = "assets/images";
 
         @Override
-        public ScreenImage load(String imageName) throws Exception {
+        public ScreenImage load(@ParametersAreNonnullByDefault
+        final String imageName) throws Exception {
             LOGGER.debug("Load image [{}]", imageName);
             final Color[][] background = getBackground(imageName);
             final Color[][] foreground = getForeground(imageName);
