@@ -20,7 +20,7 @@ import com.google.common.cache.LoadingCache;
 
 import de.hauschild.ff7rl.assets.Resources;
 import de.hauschild.ff7rl.assets.images.Images;
-import de.hauschild.ff7rl.assets.images.ScreenImage;
+import de.hauschild.ff7rl.assets.images.Image;
 import groovy.lang.GroovyClassLoader;
 
 /**
@@ -52,7 +52,7 @@ public enum Rooms {
         @Override
         public Room load(final String roomName) throws Exception {
             LOGGER.debug("Load room [{}]", roomName);
-            final ScreenImage roomImage = Images.getImage(ROOMS_ASSETS__PATH, roomName);
+            final Image roomImage = Images.getImage(ROOMS_ASSETS__PATH, roomName);
             final boolean[][] walls = getWalls(roomName);
             RoomScript roomScript = getScript(roomName);
             return new Room(roomImage, walls, roomScript);

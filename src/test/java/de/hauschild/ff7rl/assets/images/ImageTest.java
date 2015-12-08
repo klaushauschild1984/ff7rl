@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 /**
  * @author Klaus Hauschild
  */
-public class ScreenImageTest {
+public class ImageTest {
 
     @Test
     public void loadImageTest() {

@@ -8,7 +8,7 @@ package de.hauschild.ff7rl.assets.rooms;
 
 import com.googlecode.lanterna.screen.Screen;
 
-import de.hauschild.ff7rl.assets.images.ScreenImage;
+import de.hauschild.ff7rl.assets.images.Image;
 import de.hauschild.ff7rl.ui.Displayable;
 
 /**
@@ -16,11 +16,11 @@ import de.hauschild.ff7rl.ui.Displayable;
  */
 public class Room implements Displayable {
 
-    private ScreenImage roomImage;
+    private Image roomImage;
     private boolean[][] walls;
     private RoomScript  roomScript;
 
-    public Room(final ScreenImage roomImage, final boolean[][] walls, final RoomScript roomScript) {
+    public Room(final Image roomImage, final boolean[][] walls, final RoomScript roomScript) {
         this.roomImage = roomImage;
         this.walls = walls;
         this.roomScript = roomScript;

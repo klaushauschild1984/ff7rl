@@ -18,14 +18,14 @@ import java.util.List;
 /**
  * @author Klaus Hauschild
  */
-public class ScreenImage implements Displayable {
+public class Image implements Displayable {
 
     private final Color[][]    background;
     private final Color[][]    foreground;
     private final List<String> text;
     private final Dimension    size;
 
-    public ScreenImage(final Color[][] background, final Color[][] foreground, final List<String> text) {
+    public Image(final Color[][] background, final Color[][] foreground, final List<String> text) {
         this.background = background;
         this.foreground = foreground;
         this.text = text;

@@ -10,7 +10,7 @@ import com.googlecode.lanterna.screen.Screen;
 
 import de.hauschild.ff7rl.Context;
 import de.hauschild.ff7rl.assets.images.Images;
-import de.hauschild.ff7rl.assets.images.ScreenImage;
+import de.hauschild.ff7rl.assets.images.Image;
 import de.hauschild.ff7rl.assets.rooms.Room;
 import de.hauschild.ff7rl.assets.rooms.Rooms;
 import de.hauschild.ff7rl.input.Input;
@@ -24,7 +24,7 @@ import de.hauschild.ff7rl.state.StateType;
 // TODO this state has to be an abstraction for INTERIOR_MAP and WORLD_MAP
 public class MapState extends AbstractState {
 
-    private final ScreenImage cloudImage;
+    private final Image cloudImage;
     private final Room        room;
 
     private int               x = 12;
