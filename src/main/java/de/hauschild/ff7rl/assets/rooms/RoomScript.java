@@ -4,18 +4,15 @@
  * Proprietary and confidential
  * Written by Klaus Hauschild <klaus.hauschild.1984@gmail.com>, 2015
  */
-package de.hauschild.ff7rl.assets.images;
-
-import org.testng.annotations.Test;
+package de.hauschild.ff7rl.assets.rooms;
 
 /**
  * @author Klaus Hauschild
  */
-public class ScreenImageTest {
+public interface RoomScript {
 
-    @Test
-    public void loadImageTest() {
-        Images.getImage("map/cloud");
-    }
+    int getTop();
+
+    int getLeft();
 
 }

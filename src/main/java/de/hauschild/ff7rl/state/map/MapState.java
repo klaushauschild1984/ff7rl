@@ -11,6 +11,8 @@ import com.googlecode.lanterna.screen.Screen;
 import de.hauschild.ff7rl.Context;
 import de.hauschild.ff7rl.assets.images.Images;
 import de.hauschild.ff7rl.assets.images.ScreenImage;
+import de.hauschild.ff7rl.assets.rooms.Room;
+import de.hauschild.ff7rl.assets.rooms.Rooms;
 import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.state.AbstractState;
 import de.hauschild.ff7rl.state.StateHandler;
@@ -23,17 +25,21 @@ import de.hauschild.ff7rl.state.StateType;
 public class MapState extends AbstractState {
 
     private final ScreenImage cloudImage;
+    private final Room        room;
 
-    private int               x = 10;
-    private int               y = 10;
+    private int               x = 12;
+    private int               y = 12;
 
     public MapState(final Context context) {
         super(StateType.INTERIOR_MAP, context);
-        cloudImage = Images.getImage("map/cloud/cloud");
+        cloudImage = Images.getImage("map/cloud");
+        room = Rooms.getRoom("assault_on_mako_reactor_no_1/room_a");
+
     }
 
     @Override
     public void display(final Screen screen) {
+        room.display(screen, room.getTop(), room.getLeft());
         cloudImage.display(screen, y, x);
     }
 
