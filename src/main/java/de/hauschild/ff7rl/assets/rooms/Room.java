@@ -31,8 +31,9 @@ public class Room implements Displayable {
         roomImage.display(screen, top, left);
     }
 
+    // TODO maybe x and y should be transformed into rooms space
     public boolean isBlocked(final int x, final int y) {
-        return walls[x][y];
+        return walls[x - getLeft()][y - getTop()];
     }
 
     public int getTop() {

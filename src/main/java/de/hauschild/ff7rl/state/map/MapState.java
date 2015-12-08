@@ -50,15 +50,27 @@ public class MapState extends AbstractState {
         }
         switch (input) {
             case UP:
+                if (room.isBlocked(x, y - 1)) {
+                    break;
+                }
                 y--;
                 break;
             case DOWN:
+                if (room.isBlocked(x, y + 1)) {
+                    break;
+                }
                 y++;
                 break;
             case LEFT:
+                if (room.isBlocked(x - 1, y)) {
+                    break;
+                }
                 x--;
                 break;
             case RIGHT:
+                if (room.isBlocked(x + 1, y)) {
+                    break;
+                }
                 x++;
                 break;
         }
