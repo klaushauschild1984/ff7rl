@@ -25,3 +25,4 @@
 ## Project status
 - [![Build Status](https://travis-ci.org/klaushauschild1984/ff7rl.svg?branch=master)](https://travis-ci.org/klaushauschild1984/ff7rl)
 - [![Build Quality](https://scan.coverity.com/projects/7152/badge.svg)](https://scan.coverity.com/projects/klaushauschild1984-ff7rl)
+- [![Dependency Status](https://www.versioneye.com/user/projects/5667279cf376cc002c001068/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5667279cf376cc002c001068)
