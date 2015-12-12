@@ -40,6 +40,9 @@ class InputHistory {
     }
 
     private String get() {
+        if (inputHistory.isEmpty()) {
+            return null;
+        }
         return inputHistory.get(inputHistoryPointer);
     }
 
