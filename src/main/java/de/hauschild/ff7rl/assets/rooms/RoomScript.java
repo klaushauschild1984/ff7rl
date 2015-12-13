@@ -6,6 +6,8 @@
  */
 package de.hauschild.ff7rl.assets.rooms;
 
+import de.hauschild.ff7rl.context.Context;
+
 /**
  * @author Klaus Hauschild
  */
@@ -14,5 +16,11 @@ public interface RoomScript {
     int getTop();
 
     int getLeft();
+
+    void enter(Context context);
+
+    void update(Context context);
+
+    void leave(Context context);
 
 }

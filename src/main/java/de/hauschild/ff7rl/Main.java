@@ -6,30 +6,36 @@
  */
 package de.hauschild.ff7rl;
 
+import java.io.IOException;
+import java.util.Properties;
+
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
+
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ch.qos.logback.classic.Level;
+
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
 import com.jtattoo.plaf.noire.NoireLookAndFeel;
+
 import de.hauschild.ff7rl.assets.sounds.Sounds;
+import de.hauschild.ff7rl.context.Context;
 import de.hauschild.ff7rl.debug.Console;
 import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.input.InputMapping;
 import de.hauschild.ff7rl.state.State;
 import de.hauschild.ff7rl.state.StateHandler;
 import de.hauschild.ff7rl.state.StateType;
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.WindowConstants;
-import java.io.IOException;
-import java.util.Properties;
 
 /**
  * @author Klaus Hauschild
@@ -101,7 +107,7 @@ enum Main {
         ((ch.qos.logback.classic.Logger) LoggerFactory.getLogger(Main.class.getPackage().getName())).setLevel(level);
     }
 
-    private static SwingTerminalFrame getTerminal(DefaultTerminalFactory terminalFactory) {
+    private static SwingTerminalFrame getTerminal(final DefaultTerminalFactory terminalFactory) {
         try {
             return (SwingTerminalFrame) terminalFactory.createTerminal();
         } catch (final Exception exception) {
@@ -136,19 +142,21 @@ enum Main {
         }
     }
 
-    private static State handleNextState(Context context, State state, StateHandler stateHandler) {
+    private static State handleNextState(final Context context, final State state, final StateHandler stateHandler) {
         final StateType nextStateType = stateHandler.getNextStateType();
-        if (nextStateType != null) {
-            state.leave();
-            state = nextStateType.getState(context);
-            state.enter();
-            Console.rebind(state);
+        if (nextStateType == null) {
+            return state;
         }
-        return state;
+        state.leave();
+        context.setLastState(state.getType());
+        final State nextState = nextStateType.getState(context);
+        nextState.enter();
+        Console.rebind(nextState);
+        return nextState;
     }
 
-    private static Input getInput(Screen screen, InputMapping inputMapping, State state, boolean skipNextInput)
-            throws IOException {
+    private static Input getInput(final Screen screen, final InputMapping inputMapping, final State state,
+            final boolean skipNextInput) throws IOException {
         if (skipNextInput) {
             return null;
         }
@@ -160,7 +168,7 @@ enum Main {
         return input;
     }
 
-    private static void displayState(Screen screen, State state) throws IOException {
+    private static void displayState(final Screen screen, final State state) throws IOException {
         screen.clear();
         state.display(screen);
         screen.refresh();

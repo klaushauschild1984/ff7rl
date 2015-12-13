@@ -8,7 +8,7 @@ package de.hauschild.ff7rl.state.battle;
 
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.screen.Screen;
-import de.hauschild.ff7rl.Context;
+import de.hauschild.ff7rl.context.Context;
 import de.hauschild.ff7rl.assets.sounds.Sound;
 import de.hauschild.ff7rl.assets.sounds.Sounds;
 import de.hauschild.ff7rl.input.Input;
@@ -37,7 +37,7 @@ public class BattleState extends AbstractState {
 
     @Override
     public void display(final Screen screen) {
-        new ScreenBorder(30, 0, 60, 8).display(screen);
+        new ScreenBorder(60, 8).display(screen, 30, 0);
 
         screen.newTextGraphics().putString(2, 31, "Cloud");
         screen.newTextGraphics().putString(20, 31, "6666/9999");

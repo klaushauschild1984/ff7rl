@@ -9,7 +9,7 @@ package de.hauschild.ff7rl.state;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.hauschild.ff7rl.Context;
+import de.hauschild.ff7rl.context.Context;
 
 /**
  * @author Klaus Hauschild
@@ -21,7 +21,7 @@ public abstract class AbstractState implements State {
     private final StateType     type;
     private final Context       context;
 
-    protected AbstractState(final StateType type, final Context context) {
+    public AbstractState(final StateType type, final Context context) {
         this.type = type;
         this.context = context;
     }

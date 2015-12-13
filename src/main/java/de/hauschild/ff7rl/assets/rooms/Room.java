@@ -8,6 +8,7 @@ package de.hauschild.ff7rl.assets.rooms;
 
 import com.googlecode.lanterna.screen.Screen;
 
+import de.hauschild.ff7rl.context.Context;
 import de.hauschild.ff7rl.assets.images.Image;
 import de.hauschild.ff7rl.ui.Displayable;
 
@@ -18,7 +19,7 @@ public class Room implements Displayable {
 
     private Image roomImage;
     private boolean[][] walls;
-    private RoomScript  roomScript;
+    private RoomScript roomScript;
 
     public Room(final Image roomImage, final boolean[][] walls, final RoomScript roomScript) {
         this.roomImage = roomImage;
@@ -26,9 +27,17 @@ public class Room implements Displayable {
         this.roomScript = roomScript;
     }
 
+    public void enter(final Context context) {
+        roomScript.enter(context);
+    }
+
     @Override
     public void display(Screen screen, int top, int left) {
         roomImage.display(screen, top, left);
+    }
+
+    public void leave(final Context context) {
+        roomScript.leave(context);
     }
 
     // TODO maybe x and y should be transformed into rooms space
@@ -43,5 +52,4 @@ public class Room implements Displayable {
     public int getLeft() {
         return roomScript.getLeft();
     }
-
 }

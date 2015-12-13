@@ -8,7 +8,7 @@ package de.hauschild.ff7rl.state.intro;
 
 import com.google.common.collect.Lists;
 import com.googlecode.lanterna.screen.Screen;
-import de.hauschild.ff7rl.Context;
+import de.hauschild.ff7rl.context.Context;
 import de.hauschild.ff7rl.assets.Resources;
 import de.hauschild.ff7rl.assets.sounds.Sound;
 import de.hauschild.ff7rl.assets.sounds.Sounds;
@@ -89,7 +89,7 @@ public class IntroState extends AbstractState {
                 Entry selected = mainMenu.select();
                 LOGGER.debug("[{}] selected.", selected);
                 if (selected == newGameEntry) {
-                    stateHandler.nextState(StateType.BATTLE);
+                    stateHandler.nextState(StateType.INTERIOR_MAP);
                 } else if (selected == soundTestEntry) {
                     stateHandler.nextState(StateType.SOUND_TEST);
                 }

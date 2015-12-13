@@ -7,10 +7,11 @@
 package de.hauschild.ff7rl.state;
 
 import com.google.common.collect.Maps;
-import de.hauschild.ff7rl.Context;
+import de.hauschild.ff7rl.context.Context;
 import de.hauschild.ff7rl.state.battle.BattleState;
 import de.hauschild.ff7rl.state.intro.IntroState;
 import de.hauschild.ff7rl.state.map.MapState;
+import de.hauschild.ff7rl.state.menu.MenuState;
 import de.hauschild.ff7rl.state.soundtest.SoundTestState;
 
 import java.util.Map;
@@ -24,7 +25,7 @@ public enum StateType {
 
     CHARACTER_CREATION(null),
 
-    MENU(null),
+    MENU(MenuState.class),
 
     WORLD_MAP(null),
 

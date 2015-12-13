@@ -7,7 +7,7 @@
 package de.hauschild.ff7rl.state.soundtest;
 
 import com.googlecode.lanterna.screen.Screen;
-import de.hauschild.ff7rl.Context;
+import de.hauschild.ff7rl.context.Context;
 import de.hauschild.ff7rl.Threads;
 import de.hauschild.ff7rl.assets.sounds.Sound;
 import de.hauschild.ff7rl.assets.sounds.Sounds;
@@ -50,7 +50,7 @@ public class SoundTestState extends AbstractState {
 
     @Override
     public void display(final Screen screen) {
-        new ScreenBorder(1, 17, 82, 4).display(screen);
+        new ScreenBorder(82, 4).display(screen, 1, 17);
         screen.newTextGraphics().putString(19, 3,
                 String.format("[LEFT] CD %s [RIGHT] | [UP] Track [DOWN] | [ACCEPT] play/stop | [MENU] auto play", cd));
         getCdMenu().display(screen);

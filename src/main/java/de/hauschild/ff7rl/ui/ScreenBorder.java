@@ -6,42 +6,49 @@
  */
 package de.hauschild.ff7rl.ui;
 
+import com.googlecode.lanterna.TextColor.RGB;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
 /**
  * @author Klaus Hauschild
  */
-// TODO let this extend Displayable
-public class ScreenBorder {
+public class ScreenBorder implements Displayable {
 
-    private final int top;
-    private final int left;
     private final int width;
     private final int height;
 
-    public ScreenBorder(final int top, final int left, final int width, final int height) {
-        this.top = top;
-        this.left = left;
+    public ScreenBorder(final int width, final int height) {
         this.width = width;
         this.height = height;
     }
 
-    public void display(final Screen screen) {
-        TextGraphics textGraphics = screen.newTextGraphics();
+    @Override
+    public void display(Screen screen, int top, int left) {
+        final TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setBackgroundColor(new RGB(0, 0, 128));
+
         // place corners
         textGraphics.putString(left, top, "+");
-        textGraphics.putString(left + width, top, "+");
-        textGraphics.putString(left, top + height, "+");
-        textGraphics.putString(left + width, top + height, "+");
+        textGraphics.putString(left + width - 1, top, "+");
+        textGraphics.putString(left, top + height - 1, "+");
+        textGraphics.putString(left + width - 1, top + height - 1, "+");
+
         // draw lines
-        for (int i = left + 1; i < left + width; i++) {
+        for (int i = left + 1; i < left + width - 1; i++) {
             textGraphics.putString(i, top, "-");
-            textGraphics.putString(i, top + height, "-");
+            textGraphics.putString(i, top + height - 1, "-");
         }
-        for (int i = top + 1; i < top + height; i++) {
+        for (int i = top + 1; i < top + height - 1; i++) {
             textGraphics.putString(left, i, "|");
-            textGraphics.putString(left + width, i, "|");
+            textGraphics.putString(left + width - 1, i, "|");
+        }
+
+        // fill inner space
+        for (int x = left + 1; x < left + width - 1; x++) {
+            for (int y = top + 1; y < top + height - 1; y++) {
+                textGraphics.putString(x, y, " ");
+            }
         }
     }
 

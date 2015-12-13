@@ -1,11 +1,18 @@
-def class Room {
+import de.hauschild.ff7rl.context.Context
+import de.hauschild.ff7rl.context.ContextConstants
 
-    def int getTop() {
+class Room {
+
+    int getTop() {
         return 10;
     }
 
-    def int getLeft() {
+    int getLeft() {
         return 10;
+    }
+
+    void enter(final Context context) {
+        context.set(ContextConstants.General.REGION, "Mako Reactor");
     }
 
 }
