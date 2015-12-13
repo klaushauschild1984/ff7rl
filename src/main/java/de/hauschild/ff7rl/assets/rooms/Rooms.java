@@ -8,7 +8,7 @@ package de.hauschild.ff7rl.assets.rooms;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.concurrent.ExecutionException;
 
 import org.slf4j.Logger;
@@ -19,9 +19,10 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 import de.hauschild.ff7rl.assets.Resources;
-import de.hauschild.ff7rl.assets.images.Images;
 import de.hauschild.ff7rl.assets.images.Image;
+import de.hauschild.ff7rl.assets.images.Images;
 import groovy.lang.GroovyClassLoader;
+import groovy.lang.GroovyCodeSource;
 
 /**
  * @author Klaus Hauschild
@@ -74,9 +75,12 @@ public enum Rooms {
         }
 
         private RoomScript getScript(final String roomName) {
-            try (InputStream scriptStream = Resources.getInputStream(ROOMS_ASSETS__PATH,
-                    String.format("%s/script.groovy", roomName)).openInputStream()) {
-                final Class scriptClass = SCRIPT_LOADER.parseClass(scriptStream, String.format("%s.script.groovy", roomName));
+            final String codeBase = String.format("%s.script.groovy", roomName);
+            final String scriptName = String.format("%s/script.groovy", roomName);
+            try (final InputStreamReader scriptReader = new InputStreamReader(Resources.getInputStream(ROOMS_ASSETS__PATH,
+                    scriptName).openInputStream())) {
+                final GroovyCodeSource groovyCodeSource = new GroovyCodeSource(scriptReader, codeBase, codeBase);
+                final Class scriptClass = SCRIPT_LOADER.parseClass(groovyCodeSource);
                 final Object roomScript = scriptClass.newInstance();
                 return RoomScriptProxy.build(roomScript, roomName);
             } catch (final Exception exception) {

@@ -17,9 +17,9 @@ import de.hauschild.ff7rl.ui.Displayable;
  */
 public class Room implements Displayable {
 
-    private Image roomImage;
-    private boolean[][] walls;
-    private RoomScript roomScript;
+    private final Image roomImage;
+    private final boolean[][] walls;
+    private final RoomScript roomScript;
 
     public Room(final Image roomImage, final boolean[][] walls, final RoomScript roomScript) {
         this.roomImage = roomImage;
