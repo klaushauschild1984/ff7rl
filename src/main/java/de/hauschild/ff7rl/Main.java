@@ -13,6 +13,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
+import de.hauschild.ff7rl.state.Kernel;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 
@@ -148,7 +149,7 @@ enum Main {
             return state;
         }
         state.leave();
-        context.setLastState(state.getType());
+        Kernel.setLastState(context, state.getType());
         final State nextState = nextStateType.getState(context);
         nextState.enter();
         Console.rebind(nextState);

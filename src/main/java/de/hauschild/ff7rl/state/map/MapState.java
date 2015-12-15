@@ -15,6 +15,7 @@ import de.hauschild.ff7rl.assets.rooms.Room;
 import de.hauschild.ff7rl.assets.rooms.Rooms;
 import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.state.AbstractState;
+import de.hauschild.ff7rl.state.Kernel;
 import de.hauschild.ff7rl.state.StateHandler;
 import de.hauschild.ff7rl.state.StateType;
 
@@ -33,7 +34,7 @@ public class MapState extends AbstractState {
     public MapState(final Context context) {
         super(StateType.INTERIOR_MAP, context);
         cloudImage = Images.getImage("map/cloud");
-        room = Rooms.getRoom(context.getRoom());
+        room = Rooms.getRoom(Room.getRoom(context));
     }
 
     @Override
@@ -64,28 +65,28 @@ public class MapState extends AbstractState {
                 if (room.isBlocked(x, y - 1)) {
                     break;
                 }
-                getContext().incrementSteps();
+                Kernel.incrementSteps(getContext());
                 y--;
                 break;
             case DOWN:
                 if (room.isBlocked(x, y + 1)) {
                     break;
                 }
-                getContext().incrementSteps();
+                Kernel.incrementSteps(getContext());
                 y++;
                 break;
             case LEFT:
                 if (room.isBlocked(x - 1, y)) {
                     break;
                 }
-                getContext().incrementSteps();
+                Kernel.incrementSteps(getContext());
                 x--;
                 break;
             case RIGHT:
                 if (room.isBlocked(x + 1, y)) {
                     break;
                 }
-                getContext().incrementSteps();
+                Kernel.incrementSteps(getContext());
                 x++;
                 break;
             case MENU:

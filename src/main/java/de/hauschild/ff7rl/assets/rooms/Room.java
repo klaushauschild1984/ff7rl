@@ -8,8 +8,10 @@ package de.hauschild.ff7rl.assets.rooms;
 
 import com.googlecode.lanterna.screen.Screen;
 
-import de.hauschild.ff7rl.context.Context;
 import de.hauschild.ff7rl.assets.images.Image;
+import de.hauschild.ff7rl.context.Context;
+import de.hauschild.ff7rl.context.ContextConstants;
+import de.hauschild.ff7rl.context.ContextConstants.General;
 import de.hauschild.ff7rl.ui.Displayable;
 
 /**
@@ -17,9 +19,17 @@ import de.hauschild.ff7rl.ui.Displayable;
  */
 public class Room implements Displayable {
 
-    private final Image roomImage;
+    private final Image       roomImage;
     private final boolean[][] walls;
-    private final RoomScript roomScript;
+    private final RoomScript  roomScript;
+
+    public static String getRoom(final Context context) {
+        return (String) context.get(ContextConstants.Room.ROOM);
+    }
+
+    public static String getRegion(final Context context) {
+        return (String) context.get(General.REGION);
+    }
 
     public Room(final Image roomImage, final boolean[][] walls, final RoomScript roomScript) {
         this.roomImage = roomImage;
@@ -52,4 +62,5 @@ public class Room implements Displayable {
     public int getLeft() {
         return roomScript.getLeft();
     }
+
 }
