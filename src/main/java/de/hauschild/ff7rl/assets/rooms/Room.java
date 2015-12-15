@@ -31,6 +31,10 @@ public class Room implements Displayable {
         return (String) context.get(General.REGION);
     }
 
+    public static void setRegion(final Context context, final String region) {
+        context.set(General.REGION, region);
+    }
+
     public Room(final Image roomImage, final boolean[][] walls, final RoomScript roomScript) {
         this.roomImage = roomImage;
         this.walls = walls;

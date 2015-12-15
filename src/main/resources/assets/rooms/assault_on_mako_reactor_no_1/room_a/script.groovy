@@ -1,7 +1,7 @@
+import de.hauschild.ff7rl.assets.rooms.Room
 import de.hauschild.ff7rl.context.Context
-import de.hauschild.ff7rl.context.ContextConstants
 
-class Room {
+class RoomScript {
 
     int getTop() {
         return 10;
@@ -12,7 +12,7 @@ class Room {
     }
 
     void enter(final Context context) {
-        context.set(ContextConstants.General.REGION, "Mako Reactor");
+        Room.setRegion(context, "Mako Reactor");
     }
 
 }
