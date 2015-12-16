@@ -10,7 +10,6 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.AbstractMap.SimpleEntry;
@@ -37,10 +36,9 @@ public enum Images {
 
     ;
 
-    private static final Logger                                           LOGGER = LoggerFactory.getLogger(Images.class);
+    private static final Logger                                     LOGGER = LoggerFactory.getLogger(Images.class);
 
-    private static final LoadingCache<Entry<String, String>, Image> IMAGES = CacheBuilder.newBuilder().build(
-                                                                                         new ImagesLoader());
+    private static final LoadingCache<Entry<String, String>, Image> IMAGES = CacheBuilder.newBuilder().build(new ImagesLoader());
 
     public static Image getImage(final String imageName) {
         return getImage(null, imageName);
@@ -91,10 +89,9 @@ public enum Images {
         }
 
         private List<String> getText(final String assetRoot, final String imageName) {
-            try (InputStream inputStream = Resources.getInputStream(assetRoot, String.format("%s/foreground.txt", imageName))
-                    .openInputStream()) {
-                return new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8)).lines().collect(
-                        Collectors.toList());
+            try (final BufferedReader reader = new BufferedReader(new InputStreamReader(Resources.getInputStream(assetRoot,
+                    String.format("%s/foreground.txt", imageName)).openInputStream(), StandardCharsets.UTF_8))) {
+                return reader.lines().collect(Collectors.toList());
             } catch (IOException exception) {
                 throw new RuntimeException(String.format("Unable to load image [%s].", imageName), exception);
             }

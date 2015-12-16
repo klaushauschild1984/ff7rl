@@ -88,9 +88,9 @@ public class IntroState extends AbstractState {
             case ACCEPT:
                 Entry selected = mainMenu.select();
                 LOGGER.debug("[{}] selected.", selected);
-                if (selected == newGameEntry) {
+                if (selected.equals(newGameEntry)) {
                     stateHandler.nextState(StateType.INTERIOR_MAP);
-                } else if (selected == soundTestEntry) {
+                } else if (selected.equals(soundTestEntry)) {
                     stateHandler.nextState(StateType.SOUND_TEST);
                 }
                 break;
