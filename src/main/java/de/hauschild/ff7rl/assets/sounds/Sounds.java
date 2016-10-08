@@ -48,14 +48,14 @@ public enum Sounds {
     }
 
     public static Sound getSound(final String soundName) {
+        if (MUTE) {
+            return new MutedSound();
+        }
         LOGGER.debug("Requesting sound [{}]", soundName);
         Sound sound = SOUNDS.get(soundName);
         if (sound == null) {
             sound = loadSound(soundName);
             SOUNDS.put(soundName, sound);
-        }
-        if (MUTE) {
-            return new MutedSound();
         }
         return sound;
     }
