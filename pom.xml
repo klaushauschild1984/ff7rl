@@ -13,12 +13,12 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>19.0</version>
+            <version>20.0-rc1</version>
         </dependency>
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.5</version>
+            <version>2.7</version>
         </dependency>
         <dependency>
             <groupId>org.reflections</groupId>
@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.9.9</version>
+            <version>6.9.13.6</version>
             <scope>test</scope>
         </dependency>
         <!-- /tests -->
@@ -38,7 +38,7 @@
         <dependency>
             <groupId>com.googlecode.lanterna</groupId>
             <artifactId>lanterna</artifactId>
-            <version>3.0.0-beta1</version>
+            <version>3.0.0-beta3</version>
         </dependency>
         <dependency>
             <groupId>com.jtattoo</groupId>
@@ -50,33 +50,33 @@
         <dependency>
             <groupId>com.googlecode.soundlibs</groupId>
             <artifactId>mp3spi</artifactId>
-            <version>1.9.5-1</version>
+            <version>1.9.5.4</version>
         </dependency>
         <!-- /sound -->
         <!-- command line -->
         <dependency>
             <groupId>net.sf.jopt-simple</groupId>
             <artifactId>jopt-simple</artifactId>
-            <version>4.9</version>
+            <version>5.0.3</version>
         </dependency>
         <!-- /command line -->
         <!-- script evaluation -->
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
-            <version>2.4.5</version>
+            <version>2.4.7</version>
         </dependency>
         <!-- /script evaluation -->
         <!-- logging -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.13</version>
+            <version>1.7.21</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.1.3</version>
+            <version>1.1.7</version>
         </dependency>
         <!-- /logging -->
     </dependencies>

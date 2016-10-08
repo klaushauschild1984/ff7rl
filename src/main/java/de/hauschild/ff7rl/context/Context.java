@@ -26,6 +26,9 @@ public class Context {
 
     private final Map<String, Object> data   = Maps.newHashMap();
 
+    private Context() {
+    }
+
     public static Context createStartContext() {
         final Context context = new Context();
         context.set(RoomContext.ROOM_NAME, "assault_on_mako_reactor_no_1/room_a");
@@ -40,9 +43,6 @@ public class Context {
 
     public static String toJson(final Context context) {
         return GSON.toJson(context.data);
-    }
-
-    private Context() {
     }
 
     public <T> T get(final String key) {

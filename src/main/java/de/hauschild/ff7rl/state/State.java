@@ -7,6 +7,7 @@
 package de.hauschild.ff7rl.state;
 
 import com.googlecode.lanterna.screen.Screen;
+
 import de.hauschild.ff7rl.input.Input;
 
 /**

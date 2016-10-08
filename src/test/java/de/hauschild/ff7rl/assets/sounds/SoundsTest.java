@@ -6,12 +6,13 @@
  */
 package de.hauschild.ff7rl.assets.sounds;
 
-import de.hauschild.ff7rl.Threads;
-import org.testng.annotations.Test;
-
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotEquals;
 import static org.testng.Assert.assertNotNull;
+
+import org.testng.annotations.Test;
+
+import de.hauschild.ff7rl.Threads;
 
 /**
  * @author Klaus Hauschild

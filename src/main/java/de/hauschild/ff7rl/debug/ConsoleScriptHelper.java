@@ -6,19 +6,21 @@
  */
 package de.hauschild.ff7rl.debug;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
-import groovy.lang.GroovyObject;
-import groovy.lang.GroovyObjectSupport;
-import groovy.lang.Script;
-import org.codehaus.groovy.control.CompilerConfiguration;
-import org.reflections.ReflectionUtils;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import org.codehaus.groovy.control.CompilerConfiguration;
+import org.reflections.ReflectionUtils;
+
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
+
+import groovy.lang.GroovyObject;
+import groovy.lang.GroovyObjectSupport;
+import groovy.lang.Script;
 
 /**
  * @author Klaus Hauschild
@@ -28,12 +30,12 @@ enum ConsoleScriptHelper {
     ;
 
     private static final Set<String> IGNORE_BY_CLASSNAME = ImmutableSet.<String>builder() //
-                                                                 .add(Object.class.getName()) //
-                                                                 .add(Script.class.getName()) //
-                                                                 .add(GroovyObject.class.getName()) //
-                                                                 .add(GroovyObjectSupport.class.getName()) //
-                                                                 .add("Script1") //
-                                                                 .build();
+            .add(Object.class.getName()) //
+            .add(Script.class.getName()) //
+            .add(GroovyObject.class.getName()) //
+            .add(GroovyObjectSupport.class.getName()) //
+            .add("Script1") //
+            .build();
 
     public static CompilerConfiguration getCompilerConfiguration() {
         final CompilerConfiguration compilerConfiguration = new CompilerConfiguration();
@@ -42,9 +44,7 @@ enum ConsoleScriptHelper {
     }
 
     public static List<Field> getFields(final Object object) {
-        List<Field> fields = ReflectionUtils
-                .getAllFields(object.getClass())
-                .stream()
+        List<Field> fields = ReflectionUtils.getAllFields(object.getClass()).stream()
                 .filter(field -> !IGNORE_BY_CLASSNAME.contains(field.getDeclaringClass().getName())
                         && !field.getName().equals("this$0"))
                 .sorted((field1, field2) -> field1.getName().compareTo(field2.getName())).collect(Collectors.toList());

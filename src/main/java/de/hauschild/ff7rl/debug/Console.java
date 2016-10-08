@@ -6,26 +6,6 @@
  */
 package de.hauschild.ff7rl.debug;
 
-import com.google.common.base.Joiner;
-import com.google.common.base.MoreObjects;
-import com.google.common.collect.Lists;
-import de.hauschild.ff7rl.state.State;
-import groovy.lang.Binding;
-import groovy.lang.GroovyRuntimeException;
-import groovy.lang.GroovyShell;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.swing.AbstractAction;
-import javax.swing.JFrame;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.WindowConstants;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.DefaultCaret;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -42,6 +22,30 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.swing.AbstractAction;
+import javax.swing.JFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.WindowConstants;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultCaret;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.google.common.base.Joiner;
+import com.google.common.base.MoreObjects;
+import com.google.common.collect.Lists;
+
+import de.hauschild.ff7rl.state.State;
+
+import groovy.lang.Binding;
+import groovy.lang.GroovyRuntimeException;
+import groovy.lang.GroovyShell;
 
 /**
  * @author Klaus Hauschild
@@ -165,16 +169,14 @@ public class Console extends JFrame {
             suggestions.addAll(CONSOLE_BINDING.getVariables().keySet());
             Object contextObject = evaluateInput(expressionContext);
             if (!(contextObject instanceof Void)) {
-                suggestions.addAll(ConsoleScriptHelper.getFields(contextObject).stream().map(Field::getName)
+                suggestions.addAll(
+                        ConsoleScriptHelper.getFields(contextObject).stream().map(Field::getName).collect(Collectors.toList()));
+                suggestions.addAll(ConsoleScriptHelper.getMethods(contextObject).stream()
+                        .map(method -> method.getName() + "("
+                                + Joiner.on(", ").join(Arrays.asList(method.getParameterTypes()).stream()
+                                        .map(parameterType -> "_").collect(Collectors.toList()))
+                                + ")")
                         .collect(Collectors.toList()));
-                suggestions.addAll(ConsoleScriptHelper
-                        .getMethods(contextObject)
-                        .stream()
-                        .map(method -> method.getName()
-                                + "("
-                                + Joiner.on(", ").join(
-                                        Arrays.asList(method.getParameterTypes()).stream().map(parameterType -> "_")
-                                                .collect(Collectors.toList())) + ")").collect(Collectors.toList()));
             }
             final List<String> filteredSuggestions = suggestions.stream().sorted(String.CASE_INSENSITIVE_ORDER)
                     .filter(suggestion -> suggestion.startsWith(expression)).collect(Collectors.toList());

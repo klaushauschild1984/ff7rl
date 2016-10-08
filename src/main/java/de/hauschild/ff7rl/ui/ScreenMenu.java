@@ -6,11 +6,11 @@
  */
 package de.hauschild.ff7rl.ui;
 
+import java.util.List;
+
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-
-import java.util.List;
 
 /**
  * @author Klaus Hauschild

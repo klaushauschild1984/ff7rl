@@ -6,11 +6,12 @@
  */
 package de.hauschild.ff7rl.context;
 
-import java.util.AbstractMap.SimpleEntry;
 import java.util.Iterator;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 
 import com.google.common.base.Splitter;
+
 import de.hauschild.ff7rl.Actor;
 
 /**

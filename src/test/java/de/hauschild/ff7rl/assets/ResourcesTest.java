@@ -6,10 +6,10 @@
  */
 package de.hauschild.ff7rl.assets;
 
-import org.testng.annotations.Test;
-
 import static org.testng.Assert.assertTrue;
 import static org.testng.Assert.fail;
+
+import org.testng.annotations.Test;
 
 /**
  * @author Klaus Hauschild

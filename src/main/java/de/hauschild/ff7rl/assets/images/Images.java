@@ -12,8 +12,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.List;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
@@ -27,6 +27,7 @@ import com.google.common.base.MoreObjects;
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+
 import de.hauschild.ff7rl.assets.Resources;
 
 /**
@@ -89,8 +90,9 @@ public enum Images {
         }
 
         private List<String> getText(final String assetRoot, final String imageName) {
-            try (final BufferedReader reader = new BufferedReader(new InputStreamReader(Resources.getInputStream(assetRoot,
-                    String.format("%s/foreground.txt", imageName)).openInputStream(), StandardCharsets.UTF_8))) {
+            try (final BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    Resources.getInputStream(assetRoot, String.format("%s/foreground.txt", imageName)).openInputStream(),
+                    StandardCharsets.UTF_8))) {
                 return reader.lines().collect(Collectors.toList());
             } catch (IOException exception) {
                 throw new RuntimeException(String.format("Unable to load image [%s].", imageName), exception);

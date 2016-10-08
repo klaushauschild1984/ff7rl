@@ -11,7 +11,6 @@ import com.googlecode.lanterna.TextColor.RGB;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
-import de.hauschild.ff7rl.assets.rooms.Room;
 import de.hauschild.ff7rl.context.Context;
 import de.hauschild.ff7rl.context.KernelContext;
 import de.hauschild.ff7rl.context.RoomContext;

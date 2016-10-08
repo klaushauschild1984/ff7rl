@@ -6,10 +6,11 @@
  */
 package de.hauschild.ff7rl.state.intro;
 
-import de.hauschild.ff7rl.state.StateType;
+import static org.testng.Assert.assertEquals;
+
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
+import de.hauschild.ff7rl.state.StateType;
 
 /**
  * @author Klaus Hauschild

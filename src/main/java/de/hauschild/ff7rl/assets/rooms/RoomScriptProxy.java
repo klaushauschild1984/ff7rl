@@ -32,7 +32,8 @@ public enum RoomScriptProxy {
                 return targetMethod.invoke(target, args);
             } catch (final Exception exception) {
                 if (!(exception instanceof NoSuchMethodException)) {
-                    LOGGER.warn(String.format("Error while executing method [%s] not defined [%s] room script.", method, roomName),
+                    LOGGER.warn(
+                            String.format("Error while executing method [%s] not defined [%s] room script.", method, roomName),
                             exception);
                 }
                 return null;

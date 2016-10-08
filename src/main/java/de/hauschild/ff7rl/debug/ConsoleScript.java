@@ -6,13 +6,14 @@
  */
 package de.hauschild.ff7rl.debug;
 
-import com.google.common.base.Joiner;
-import com.google.common.collect.Iterables;
-import groovy.lang.Script;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+
+import com.google.common.base.Joiner;
+import com.google.common.collect.Iterables;
+
+import groovy.lang.Script;
 
 /**
  * @author Klaus Hauschild
@@ -32,8 +33,8 @@ public class ConsoleScript extends Script {
             builder.append("\n  ");
             builder.append(method.getName());
             builder.append("(");
-            builder.append(Joiner.on(", ").join(
-                    Iterables.transform(Arrays.asList(method.getParameterTypes()), Class::getSimpleName)));
+            builder.append(
+                    Joiner.on(", ").join(Iterables.transform(Arrays.asList(method.getParameterTypes()), Class::getSimpleName)));
             builder.append("): ");
             builder.append(method.getReturnType().getSimpleName());
         }

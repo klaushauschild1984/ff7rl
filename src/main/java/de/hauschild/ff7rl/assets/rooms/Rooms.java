@@ -21,6 +21,7 @@ import com.google.common.cache.LoadingCache;
 import de.hauschild.ff7rl.assets.Resources;
 import de.hauschild.ff7rl.assets.images.Image;
 import de.hauschild.ff7rl.assets.images.Images;
+
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyCodeSource;
 
@@ -77,8 +78,8 @@ public enum Rooms {
         private RoomScript getScript(final String roomName) {
             final String codeBase = String.format("%s.script.groovy", roomName);
             final String scriptName = String.format("%s/script.groovy", roomName);
-            try (final InputStreamReader scriptReader = new InputStreamReader(Resources.getInputStream(ROOMS_ASSETS__PATH,
-                    scriptName).openInputStream())) {
+            try (final InputStreamReader scriptReader = new InputStreamReader(
+                    Resources.getInputStream(ROOMS_ASSETS__PATH, scriptName).openInputStream())) {
                 final GroovyCodeSource groovyCodeSource = new GroovyCodeSource(scriptReader, codeBase, codeBase);
                 final Class scriptClass = SCRIPT_LOADER.parseClass(groovyCodeSource);
                 final Object roomScript = scriptClass.newInstance();

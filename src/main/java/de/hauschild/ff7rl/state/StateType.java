@@ -6,15 +6,16 @@
  */
 package de.hauschild.ff7rl.state;
 
+import java.util.Map;
+
 import com.google.common.collect.Maps;
+
 import de.hauschild.ff7rl.context.Context;
 import de.hauschild.ff7rl.state.battle.BattleState;
 import de.hauschild.ff7rl.state.intro.IntroState;
 import de.hauschild.ff7rl.state.map.MapState;
 import de.hauschild.ff7rl.state.menu.MenuState;
 import de.hauschild.ff7rl.state.soundtest.SoundTestState;
-
-import java.util.Map;
 
 /**
  * @author Klaus Hauschild

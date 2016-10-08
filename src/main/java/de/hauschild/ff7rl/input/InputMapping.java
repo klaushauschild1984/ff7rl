@@ -6,6 +6,15 @@
  */
 package de.hauschild.ff7rl.input;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Map.Entry;
+
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
@@ -17,33 +26,18 @@ import com.google.common.io.Files;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Properties;
-
 /**
  * @author Klaus Hauschild
  */
 public class InputMapping {
 
     private static final File                  INPUT_MAPPING_FILE = new File("input.mapping");
-    private static final Map<KeyStroke, Input> DEFAULT_MAPPINGS   = ImmutableMap
-                                                                          .<KeyStroke, Input>builder()
-                                                                          .put(new KeyStroke(KeyType.ArrowDown), Input.DOWN)
-                                                                          .put(new KeyStroke(KeyType.ArrowUp), Input.UP)
-                                                                          .put(new KeyStroke(KeyType.ArrowRight), Input.RIGHT)
-                                                                          .put(new KeyStroke(KeyType.ArrowLeft), Input.LEFT)
-                                                                          .put(new KeyStroke(KeyType.Enter), Input.ACCEPT)
-                                                                          .put(new KeyStroke(KeyType.Escape), Input.ABORT)
-                                                                          .put(new KeyStroke(KeyType.Backspace), Input.ABORT)
-                                                                          .put(new KeyStroke(' ', false, false), Input.MENU)
-                                                                          .put(new KeyStroke(KeyType.ReverseTab),
-                                                                                  Input.DEBUG_CONSOLE).build();
+    private static final Map<KeyStroke, Input> DEFAULT_MAPPINGS   = ImmutableMap.<KeyStroke, Input>builder()
+            .put(new KeyStroke(KeyType.ArrowDown), Input.DOWN).put(new KeyStroke(KeyType.ArrowUp), Input.UP)
+            .put(new KeyStroke(KeyType.ArrowRight), Input.RIGHT).put(new KeyStroke(KeyType.ArrowLeft), Input.LEFT)
+            .put(new KeyStroke(KeyType.Enter), Input.ACCEPT).put(new KeyStroke(KeyType.Escape), Input.ABORT)
+            .put(new KeyStroke(KeyType.Backspace), Input.ABORT).put(new KeyStroke(' ', false, false), Input.MENU)
+            .put(new KeyStroke(KeyType.ReverseTab), Input.DEBUG_CONSOLE).build();
 
     private final Map<KeyStroke, Input>        keyMappings;
 
@@ -100,11 +94,14 @@ public class InputMapping {
                     + " Each combination of \"Ctrl+\" and \"Alt+\" is possible.\n"
                     + " An input is a printable character in lowercase or uppercase or one of the following special keys (note that not all keyboards support all special keys):\n"
                     + " "
-                    + Joiner.on(",").join(
-                            Iterables.transform(
-                                    Iterables.filter(Arrays.asList(KeyType.values()), keyType -> keyType != KeyType.Character
-                                            && keyType != KeyType.Unknown && keyType != KeyType.CursorLocation
-                                            && keyType != KeyType.EOF), Enum::name)) + "," + KeyStrokes.SPACE + "\n" + "";
+                    + Joiner.on(",")
+                            .join(Iterables
+                                    .transform(
+                                            Iterables.filter(Arrays.asList(KeyType.values()),
+                                                    keyType -> keyType != KeyType.Character && keyType != KeyType.Unknown
+                                                            && keyType != KeyType.CursorLocation && keyType != KeyType.EOF),
+                                            Enum::name))
+                    + "," + KeyStrokes.SPACE + "\n" + "";
             inputMappings.store(writer, comments);
         } catch (final Exception exception) {
             throw new RuntimeException("Unable to write input mapping file.", exception);

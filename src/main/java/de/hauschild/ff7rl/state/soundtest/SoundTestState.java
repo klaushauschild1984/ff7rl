@@ -6,11 +6,16 @@
  */
 package de.hauschild.ff7rl.state.soundtest;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.googlecode.lanterna.screen.Screen;
-import de.hauschild.ff7rl.context.Context;
+
 import de.hauschild.ff7rl.Threads;
 import de.hauschild.ff7rl.assets.sounds.Sound;
 import de.hauschild.ff7rl.assets.sounds.Sounds;
+import de.hauschild.ff7rl.context.Context;
 import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.state.AbstractState;
 import de.hauschild.ff7rl.state.StateHandler;
@@ -19,33 +24,25 @@ import de.hauschild.ff7rl.ui.ScreenBorder;
 import de.hauschild.ff7rl.ui.ScreenMenu;
 import de.hauschild.ff7rl.ui.ScreenMenu.Entry;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 /**
  * @author Klaus Hauschild
  */
 public class SoundTestState extends AbstractState {
 
-    private int                                   cd     = 1;
+    private final Map<Integer, ScreenMenu<Entry>> cdMenus;
+    private int                                   cd = 1;
     private Sound                                 currentSound;
     private String                                currentSoundName;
     private boolean                               autoPlay;
-    private final Map<Integer, ScreenMenu<Entry>> cdMenus;
 
     public SoundTestState(final Context context) {
         super(StateType.SOUND_TEST, context);
-        cdMenus = Arrays
-                .asList(1, 2, 3, 4)
-                .stream()
-                .collect(
-                        Collectors.toMap(
-                                cd -> cd,
-                                cd -> new ScreenMenu<>(Sounds.getAllSounds().stream()
-                                        .filter(sound -> sound.startsWith(Integer.toString(cd)))
-                                        .map(sound -> new Entry(sound.replace(".mp3", ""))).collect(Collectors.toList()), 15, 30,
-                                        true)));
+        cdMenus = Arrays.asList(1, 2, 3, 4).stream()
+                .collect(Collectors.toMap(cd -> cd,
+                        cd -> new ScreenMenu<>(
+                                Sounds.getAllSounds().stream().filter(sound -> sound.startsWith(Integer.toString(cd)))
+                                        .map(sound -> new Entry(sound.replace(".mp3", ""))).collect(Collectors.toList()),
+                                15, 30, true)));
     }
 
     @Override

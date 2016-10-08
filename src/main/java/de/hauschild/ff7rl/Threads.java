@@ -6,8 +6,6 @@
  */
 package de.hauschild.ff7rl;
 
-import com.google.common.base.Throwables;
-
 /**
  * @author Klaus Hauschild
  */
@@ -19,7 +17,7 @@ public enum Threads {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException exception) {
-            throw Throwables.propagate(exception);
+            throw new RuntimeException(exception);
         }
     }
 }

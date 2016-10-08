@@ -6,8 +6,8 @@
  */
 package de.hauschild.ff7rl.state.map;
 
-import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
 
 import com.googlecode.lanterna.screen.Screen;

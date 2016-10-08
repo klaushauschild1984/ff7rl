@@ -6,33 +6,18 @@
  */
 package de.hauschild.ff7rl.debug;
 
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertEquals;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import static org.testng.Assert.assertEquals;
+import org.testng.annotations.Test;
 
 /**
  * @author Klaus Hauschild
  */
 public class ConsoleScriptHelperTest {
-
-    private class TestClass {
-
-        String string;
-        boolean bool;
-        int integer;
-
-        String string() {
-            return null;
-        }
-
-        void nothing() {
-        }
-
-    }
 
     @Test
     public void getFieldsTest() {
@@ -51,6 +36,21 @@ public class ConsoleScriptHelperTest {
         assertEquals(methods.size(), 2);
         assertEquals(methods.get(0).getName(), "nothing");
         assertEquals(methods.get(1).getName(), "string");
+    }
+
+    private class TestClass {
+
+        String  string;
+        boolean bool;
+        int     integer;
+
+        String string() {
+            return null;
+        }
+
+        void nothing() {
+        }
+
     }
 
 }

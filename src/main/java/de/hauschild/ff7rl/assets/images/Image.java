@@ -6,14 +6,15 @@
  */
 package de.hauschild.ff7rl.assets.images;
 
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.screen.Screen;
-import de.hauschild.ff7rl.ui.Displayable;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
+
+import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.screen.Screen;
+
+import de.hauschild.ff7rl.ui.Displayable;
 
 /**
  * @author Klaus Hauschild
@@ -41,10 +42,10 @@ public class Image implements Displayable {
                 Color background = getBackground(x, y);
                 Color foreground = getForeground(x, y);
                 String text = getText(x, y);
-                textGraphics.setBackgroundColor(new TextColor.RGB(background.getRed(), background.getGreen(), background
-                        .getBlue()));
-                textGraphics.setForegroundColor(new TextColor.RGB(foreground.getRed(), foreground.getGreen(), foreground
-                        .getBlue()));
+                textGraphics
+                        .setBackgroundColor(new TextColor.RGB(background.getRed(), background.getGreen(), background.getBlue()));
+                textGraphics
+                        .setForegroundColor(new TextColor.RGB(foreground.getRed(), foreground.getGreen(), foreground.getBlue()));
                 textGraphics.putString(left + x, top + y, text);
             }
         }

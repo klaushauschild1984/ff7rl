@@ -13,14 +13,8 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
 
-import de.hauschild.ff7rl.context.KernelContext;
-import joptsimple.OptionParser;
-import joptsimple.OptionSet;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import ch.qos.logback.classic.Level;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.screen.Screen;
@@ -31,12 +25,17 @@ import com.jtattoo.plaf.noire.NoireLookAndFeel;
 
 import de.hauschild.ff7rl.assets.sounds.Sounds;
 import de.hauschild.ff7rl.context.Context;
+import de.hauschild.ff7rl.context.KernelContext;
 import de.hauschild.ff7rl.debug.Console;
 import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.input.InputMapping;
 import de.hauschild.ff7rl.state.State;
 import de.hauschild.ff7rl.state.StateHandler;
 import de.hauschild.ff7rl.state.StateType;
+
+import ch.qos.logback.classic.Level;
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
 
 /**
  * @author Klaus Hauschild
@@ -53,9 +52,9 @@ enum Main {
         setupLookAndFeel();
         processArguments(args);
         final DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
-        terminalFactory.setSwingTerminalFrameTitle(String.format("Final Fantasy 7 roguelike (%s)", Version.get()));
         terminalFactory.setInitialTerminalSize(new TerminalSize(120, 48));
         final SwingTerminalFrame terminal = getTerminal(terminalFactory);
+        terminal.setTitle(String.format("Final Fantasy 7 roguelike (%s)", Version.get()));
         terminal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         terminal.setResizable(false);
         terminal.setLocationRelativeTo(null);
