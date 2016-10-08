@@ -1,7 +1,15 @@
-import de.hauschild.ff7rl.assets.rooms.Room
+import de.hauschild.ff7rl.Actor
 import de.hauschild.ff7rl.context.Context
+import de.hauschild.ff7rl.context.RoomContext
 
 class RoomScript {
+
+    Context context
+    int top = 12;
+
+    void initialize(final Context context) {
+        this.context = context;
+    }
 
     int getTop() {
         return 10;
@@ -11,8 +19,16 @@ class RoomScript {
         return 10;
     }
 
-    void enter(final Context context) {
-        Room.setRegion(context, "Mako Reactor");
+    void enter() {
+        RoomContext.setRegion(context, "Mako Reactor");
+        RoomContext.placeActor(context, Actor.CLOUD, top, 12);
+        RoomContext.activeActor(context, Actor.CLOUD);
+    }
+
+    int update() {
+        top++;
+        RoomContext.placeActor(context, Actor.CLOUD, top, 12);
+        return 500;
     }
 
 }

@@ -6,29 +6,44 @@
  */
 package de.hauschild.ff7rl;
 
+import de.hauschild.ff7rl.assets.images.Image;
+import de.hauschild.ff7rl.assets.images.Images;
+
 /**
  * @author Klaus Hauschild
  */
 public enum Actor {
 
-    CLOUD,
+    CLOUD("map/cloud"),
 
-    TIFA,
+    TIFA(null),
 
-    BARRET,
+    BARRET(null),
 
-    AERIS,
+    AERIS(null),
 
-    RED_XIII,
+    RED_XIII(null),
 
-    CAIT_SITH,
+    CAIT_SITH(null),
 
-    CID,
+    CID(null),
 
-    YUFIE,
+    YUFIE(null),
 
-    VINCENT,
+    VINCENT(null),
 
-    SEPHIROTH,
+    SEPHIROTH(null),
+
+    ;
+
+    private String imageName;
+
+    Actor(final String imageName) {
+        this.imageName = imageName;
+    }
+
+    public Image getImage() {
+        return Images.getImage(imageName);
+    }
 
 }

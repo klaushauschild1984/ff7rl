@@ -6,34 +6,16 @@
  */
 package de.hauschild.ff7rl.assets.rooms;
 
-import com.googlecode.lanterna.screen.Screen;
-
 import de.hauschild.ff7rl.assets.images.Image;
-import de.hauschild.ff7rl.context.Context;
-import de.hauschild.ff7rl.context.ContextConstants;
-import de.hauschild.ff7rl.context.ContextConstants.General;
-import de.hauschild.ff7rl.ui.Displayable;
 
 /**
  * @author Klaus Hauschild
  */
-public class Room implements Displayable {
+public class Room {
 
     private final Image       roomImage;
     private final boolean[][] walls;
     private final RoomScript  roomScript;
-
-    public static String getRoom(final Context context) {
-        return (String) context.get(ContextConstants.Room.ROOM);
-    }
-
-    public static String getRegion(final Context context) {
-        return (String) context.get(General.REGION);
-    }
-
-    public static void setRegion(final Context context, final String region) {
-        context.set(General.REGION, region);
-    }
 
     public Room(final Image roomImage, final boolean[][] walls, final RoomScript roomScript) {
         this.roomImage = roomImage;
@@ -41,30 +23,16 @@ public class Room implements Displayable {
         this.roomScript = roomScript;
     }
 
-    public void enter(final Context context) {
-        roomScript.enter(context);
+    public RoomScript getRoomScript() {
+        return roomScript;
     }
 
-    @Override
-    public void display(Screen screen, int top, int left) {
-        roomImage.display(screen, top, left);
+    public Image getRoomImage() {
+        return roomImage;
     }
 
-    public void leave(final Context context) {
-        roomScript.leave(context);
-    }
-
-    // TODO maybe x and y should be transformed into rooms space
-    public boolean isBlocked(final int x, final int y) {
-        return walls[x - getLeft()][y - getTop()];
-    }
-
-    public int getTop() {
-        return roomScript.getTop();
-    }
-
-    public int getLeft() {
-        return roomScript.getLeft();
+    public boolean[][] getWalls() {
+        return walls;
     }
 
 }

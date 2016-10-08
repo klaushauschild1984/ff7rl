@@ -13,14 +13,16 @@ import de.hauschild.ff7rl.context.Context;
  */
 public interface RoomScript {
 
+    void initialize(Context context);
+
     int getTop();
 
     int getLeft();
 
-    void enter(Context context);
+    void enter();
 
-    void update(Context context);
+    int update();
 
-    void leave(Context context);
+    void leave();
 
 }

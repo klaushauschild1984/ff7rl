@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import de.hauschild.ff7rl.context.ContextConstants.Room;
 
 /**
  * @author Klaus Hauschild
@@ -29,7 +28,7 @@ public class Context {
 
     public static Context createStartContext() {
         final Context context = new Context();
-        context.set(Room.ROOM, "assault_on_mako_reactor_no_1/room_a");
+        context.set(RoomContext.ROOM_NAME, "assault_on_mako_reactor_no_1/room_a");
         return context;
     }
 
@@ -46,16 +45,16 @@ public class Context {
     private Context() {
     }
 
-    public Object get(final String key) {
-        return data.get(key);
+    public <T> T get(final String key) {
+        return (T) data.get(key);
     }
 
-    public Object get(final String key, final Object defaultValue) {
+    public <T> T get(final String key, final T defaultValue) {
         final Object value = data.get(key);
         if (value == null) {
             return defaultValue;
         }
-        return value;
+        return (T) value;
     }
 
     public void set(final String key, final Object value) {
