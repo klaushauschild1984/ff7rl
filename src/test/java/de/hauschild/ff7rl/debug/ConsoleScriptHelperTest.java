@@ -21,8 +21,8 @@ public class ConsoleScriptHelperTest {
 
     @Test
     public void getFieldsTest() {
-        TestClass testClass = new TestClass();
-        List<Field> fields = ConsoleScriptHelper.getFields(testClass);
+        final TestClass testClass = new TestClass();
+        final List<Field> fields = ConsoleScriptHelper.getFields(testClass);
         assertEquals(fields.size(), 3);
         assertEquals(fields.get(0).getName(), "bool");
         assertEquals(fields.get(1).getName(), "integer");
@@ -31,8 +31,8 @@ public class ConsoleScriptHelperTest {
 
     @Test
     public void getMethodsTest() {
-        TestClass testClass = new TestClass();
-        List<Method> methods = ConsoleScriptHelper.getMethods(testClass);
+        final TestClass testClass = new TestClass();
+        final List<Method> methods = ConsoleScriptHelper.getMethods(testClass);
         assertEquals(methods.size(), 2);
         assertEquals(methods.get(0).getName(), "nothing");
         assertEquals(methods.get(1).getName(), "string");
