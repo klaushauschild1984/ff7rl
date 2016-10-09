@@ -127,7 +127,7 @@ public class Console extends JFrame {
                     evaluateInput();
                     break;
                 case KeyEvent.VK_TAB:
-                    autcompleteInput();
+                    autoCompleteInput();
                     break;
             }
         }
@@ -152,8 +152,8 @@ public class Console extends JFrame {
             }
         }
 
-        private void autcompleteInput() {
-            String inputText = input.getText();
+        private void autoCompleteInput() {
+            final String inputText = input.getText();
             String expressionContext;
             String expression;
             if (!inputText.contains(".")) {
@@ -165,28 +165,40 @@ public class Console extends JFrame {
                 expression = inputText.substring(lastIndexOfDot + 1).trim();
             }
             LOGGER.trace("expressionContext: {}", expressionContext);
+            final List<String> suggestions = getSuggestions(expressionContext, expression);
+            LOGGER.trace("suggestions: {}", suggestions);
+            if (suggestions.isEmpty()) {
+                return;
+            }
+            final JPopupMenu popup = getSuggestionPopup(expression, suggestions);
+            showSuggestionPopup(popup);
+        }
+
+        private List<String> getSuggestions(final String expressionContext, final String expression) {
             final List<String> suggestions = Lists.newArrayList();
             suggestions.addAll(CONSOLE_BINDING.getVariables().keySet());
-            Object contextObject = evaluateInput(expressionContext);
+            final Object contextObject = evaluateInput(expressionContext);
             if (!(contextObject instanceof Void)) {
                 suggestions.addAll(
                         ConsoleScriptHelper.getFields(contextObject).stream().map(Field::getName).collect(Collectors.toList()));
-                suggestions.addAll(ConsoleScriptHelper.getMethods(contextObject).stream()
-                        .map(method -> method.getName() + "("
-                                + Joiner.on(", ").join(Arrays.asList(method.getParameterTypes()).stream()
-                                        .map(parameterType -> "_").collect(Collectors.toList()))
-                                + ")")
-                        .collect(Collectors.toList()));
+                suggestions
+                        .addAll(ConsoleScriptHelper.getMethods(contextObject)
+                                .stream().map(
+                                        method -> method.getName() + "("
+                                                + Joiner.on(", ")
+                                                        .join(Arrays.stream(method.getParameterTypes()).map(parameterType -> "_")
+                                                                .collect(Collectors.toList()))
+                                                + ")")
+                                .collect(Collectors.toList()));
             }
-            final List<String> filteredSuggestions = suggestions.stream().sorted(String.CASE_INSENSITIVE_ORDER)
+            return suggestions.stream().sorted(String.CASE_INSENSITIVE_ORDER)
                     .filter(suggestion -> suggestion.startsWith(expression)).collect(Collectors.toList());
-            LOGGER.trace("suggestions: {}", filteredSuggestions);
-            if (filteredSuggestions.isEmpty()) {
-                return;
-            }
-            JPopupMenu popup = new JPopupMenu();
-            filteredSuggestions.forEach(suggestion -> {
-                JMenuItem menuItem = new JMenuItem(new AbstractAction(suggestion) {
+        }
+
+        private JPopupMenu getSuggestionPopup(final String expression, final List<String> suggestions) {
+            final JPopupMenu popup = new JPopupMenu();
+            suggestions.forEach(suggestion -> {
+                final JMenuItem menuItem = new JMenuItem(new AbstractAction(suggestion) {
 
                     @Override
                     public void actionPerformed(ActionEvent event) {
@@ -196,8 +208,12 @@ public class Console extends JFrame {
                 });
                 popup.add(menuItem);
             });
+            return popup;
+        }
+
+        private void showSuggestionPopup(final JPopupMenu popup) {
             try {
-                Rectangle caretPosition = input.modelToView(input.getCaretPosition());
+                final Rectangle caretPosition = input.modelToView(input.getCaretPosition());
                 popup.show(input, caretPosition.x, caretPosition.y);
             } catch (BadLocationException exception) {
                 LOGGER.error(exception.getMessage());
