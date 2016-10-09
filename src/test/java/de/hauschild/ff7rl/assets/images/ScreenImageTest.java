@@ -11,11 +11,11 @@ import org.testng.annotations.Test;
 /**
  * @author Klaus Hauschild
  */
-public class ImageTest {
+public class ScreenImageTest {
 
     @Test
     public void loadImageTest() {
-        Images.getImage("map/cloud");
+        Images.getScreenImage("map/cloud");
     }
 
 }

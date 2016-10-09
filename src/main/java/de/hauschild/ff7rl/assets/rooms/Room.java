@@ -6,19 +6,19 @@
  */
 package de.hauschild.ff7rl.assets.rooms;
 
-import de.hauschild.ff7rl.assets.images.Image;
+import de.hauschild.ff7rl.assets.images.ScreenImage;
 
 /**
  * @author Klaus Hauschild
  */
 public class Room {
 
-    private final Image       roomImage;
+    private final ScreenImage roomScreenImage;
     private final boolean[][] walls;
     private final RoomScript  roomScript;
 
-    public Room(final Image roomImage, final boolean[][] walls, final RoomScript roomScript) {
-        this.roomImage = roomImage;
+    public Room(final ScreenImage roomScreenImage, final boolean[][] walls, final RoomScript roomScript) {
+        this.roomScreenImage = roomScreenImage;
         this.walls = walls;
         this.roomScript = roomScript;
     }
@@ -27,8 +27,8 @@ public class Room {
         return roomScript;
     }
 
-    public Image getRoomImage() {
-        return roomImage;
+    public ScreenImage getRoomScreenImage() {
+        return roomScreenImage;
     }
 
     public boolean[][] getWalls() {

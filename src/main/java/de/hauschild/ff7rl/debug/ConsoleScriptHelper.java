@@ -59,10 +59,10 @@ enum ConsoleScriptHelper {
     }
 
     public static List<Method> getMethods(final Object object) {
-        List<Method> methods = ReflectionUtils.getAllMethods(object.getClass()).stream()
+        final List<Method> methods = ReflectionUtils.getAllMethods(object.getClass()).stream()
                 .filter(method -> !IGNORE_BY_CLASSNAME.contains(method.getDeclaringClass().getName()))
                 .sorted((method1, method2) -> method1.getName().compareTo(method2.getName())).collect(Collectors.toList());
-        Set<String> uniqueNames = Sets.newHashSet();
+        final Set<String> uniqueNames = Sets.newHashSet();
         // TODO handle overloaded methods with same name correct (now they will filtered)
         return methods.stream().filter(method -> {
             if (uniqueNames.contains(method.getName())) {

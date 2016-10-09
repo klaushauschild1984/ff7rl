@@ -35,6 +35,7 @@ public enum Sounds {
     private static final Logger             LOGGER             = LoggerFactory.getLogger(Sounds.class);
 
     private static final String             SOUND_ASSETS__PATH = "assets/sounds";
+    // TODO use Guava CacheBuilder
     private static final Map<String, Sound> SOUNDS             = Maps.newHashMap();
     private static final Reflections        REFLECTIONS        = new Reflections(
             new ConfigurationBuilder().setUrls(ClasspathHelper.forClassLoader()).setScanners(new ResourcesScanner()));

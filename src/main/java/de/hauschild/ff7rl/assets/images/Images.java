@@ -37,15 +37,16 @@ public enum Images {
 
     ;
 
-    private static final Logger                                     LOGGER = LoggerFactory.getLogger(Images.class);
+    private static final Logger                                           LOGGER = LoggerFactory.getLogger(Images.class);
 
-    private static final LoadingCache<Entry<String, String>, Image> IMAGES = CacheBuilder.newBuilder().build(new ImagesLoader());
+    private static final LoadingCache<Entry<String, String>, ScreenImage> IMAGES = CacheBuilder.newBuilder()
+            .build(new ImagesLoader());
 
-    public static Image getImage(final String imageName) {
-        return getImage(null, imageName);
+    public static ScreenImage getScreenImage(final String imageName) {
+        return getScreenImage(null, imageName);
     }
 
-    public static Image getImage(final String assetRoot, final String imageName) {
+    public static ScreenImage getScreenImage(final String assetRoot, final String imageName) {
         LOGGER.debug("Requesting image [{}]", imageName);
         try {
             return IMAGES.get(new SimpleEntry<>(assetRoot, imageName));
@@ -54,8 +55,9 @@ public enum Images {
         }
     }
 
-    public static BufferedImage loadImage(final String assetRoot, final String imageName) {
+    public static BufferedImage getImage(final String assetRoot, final String imageName) {
         try {
+            // TODO cache the result
             return ImageIO.read(Resources.getInputStream(assetRoot, imageName).openInputStream());
         } catch (IOException exception) {
             throw new RuntimeException(String.format("Unable to load image [%s].", imageName), exception);
@@ -74,19 +76,19 @@ public enum Images {
         return colors;
     }
 
-    private static final class ImagesLoader extends CacheLoader<Entry<String, String>, Image> {
+    private static final class ImagesLoader extends CacheLoader<Entry<String, String>, ScreenImage> {
 
         private static final String IMAGES_ASSETS__PATH = "assets/images";
 
         @Override
-        public Image load(final Entry<String, String> assetRootAndImageName) throws Exception {
+        public ScreenImage load(final Entry<String, String> assetRootAndImageName) throws Exception {
             final String imageName = assetRootAndImageName.getValue();
             final String assetRoot = MoreObjects.firstNonNull(assetRootAndImageName.getKey(), IMAGES_ASSETS__PATH);
             LOGGER.debug("Load image [{}]", imageName);
             final Color[][] background = getBackground(assetRoot, imageName);
             final Color[][] foreground = getForeground(assetRoot, imageName);
             final List<String> text = getText(assetRoot, imageName);
-            return new Image(background, foreground, text);
+            return new ScreenImage(background, foreground, text);
         }
 
         private List<String> getText(final String assetRoot, final String imageName) {
@@ -109,7 +111,7 @@ public enum Images {
 
         private Color[][] getColors(final String assetRoot, final String imageName, final String nameTemplate) {
             final String colorsImageName = String.format(nameTemplate, imageName);
-            BufferedImage colorsImage = loadImage(assetRoot, colorsImageName);
+            BufferedImage colorsImage = getImage(assetRoot, colorsImageName);
             return Images.getColors(colorsImage);
         }
 

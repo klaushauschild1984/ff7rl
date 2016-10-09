@@ -23,6 +23,7 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
 import com.jtattoo.plaf.noire.NoireLookAndFeel;
 
+import de.hauschild.ff7rl.assets.images.Images;
 import de.hauschild.ff7rl.assets.sounds.Sounds;
 import de.hauschild.ff7rl.context.Context;
 import de.hauschild.ff7rl.context.KernelContext;
@@ -58,7 +59,7 @@ enum Main {
         terminal.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         terminal.setResizable(false);
         terminal.setLocationRelativeTo(null);
-        // TODO terminal.setIconImage(null);
+        terminal.setIconImage(Images.getImage("assets/images", "logo.png"));
         try {
             mainLoop(new TerminalScreen(terminal));
         } catch (final Exception exception) {

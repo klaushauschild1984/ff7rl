@@ -6,8 +6,8 @@
  */
 package de.hauschild.ff7rl;
 
-import de.hauschild.ff7rl.assets.images.Image;
 import de.hauschild.ff7rl.assets.images.Images;
+import de.hauschild.ff7rl.assets.images.ScreenImage;
 
 /**
  * @author Klaus Hauschild
@@ -42,8 +42,8 @@ public enum Actor {
         this.imageName = imageName;
     }
 
-    public Image getImage() {
-        return Images.getImage(imageName);
+    public ScreenImage getImage() {
+        return Images.getScreenImage(imageName);
     }
 
 }

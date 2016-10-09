@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.util.List;
 
-import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.TextColor.RGB;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
@@ -19,14 +19,14 @@ import de.hauschild.ff7rl.ui.Displayable;
 /**
  * @author Klaus Hauschild
  */
-public class Image implements Displayable {
+public class ScreenImage implements Displayable {
 
     private final Color[][]    background;
     private final Color[][]    foreground;
     private final List<String> text;
     private final Dimension    size;
 
-    public Image(final Color[][] background, final Color[][] foreground, final List<String> text) {
+    public ScreenImage(final Color[][] background, final Color[][] foreground, final List<String> text) {
         this.background = background;
         this.foreground = foreground;
         this.text = text;
@@ -35,20 +35,22 @@ public class Image implements Displayable {
 
     @Override
     public void display(final Screen screen, final int top, final int left) {
-        TextGraphics textGraphics = screen.newTextGraphics();
+        final TextGraphics textGraphics = screen.newTextGraphics();
         for (int x = 0; x < size.width; x++) {
             for (int y = 0; y < size.height; y++) {
                 // TODO handle transparent pixels and non present text
-                Color background = getBackground(x, y);
-                Color foreground = getForeground(x, y);
-                String text = getText(x, y);
-                textGraphics
-                        .setBackgroundColor(new TextColor.RGB(background.getRed(), background.getGreen(), background.getBlue()));
-                textGraphics
-                        .setForegroundColor(new TextColor.RGB(foreground.getRed(), foreground.getGreen(), foreground.getBlue()));
+                final Color background = getBackground(x, y);
+                final Color foreground = getForeground(x, y);
+                final String text = getText(x, y);
+                textGraphics.setBackgroundColor(convertColor(background));
+                textGraphics.setForegroundColor(convertColor(foreground));
                 textGraphics.putString(left + x, top + y, text);
             }
         }
+    }
+
+    private RGB convertColor(final Color color) {
+        return new RGB(color.getRed(), color.getGreen(), color.getBlue());
     }
 
     private Color getBackground(final int x, final int y) {

@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 import com.googlecode.lanterna.screen.Screen;
 
 import de.hauschild.ff7rl.Actor;
-import de.hauschild.ff7rl.assets.images.Image;
+import de.hauschild.ff7rl.assets.images.ScreenImage;
 import de.hauschild.ff7rl.assets.rooms.Room;
 import de.hauschild.ff7rl.assets.rooms.Rooms;
 import de.hauschild.ff7rl.context.Context;
@@ -47,12 +47,12 @@ public class MapState extends AbstractState {
     @Override
     public void display(final Screen screen) {
         // display room
-        room.getRoomImage().display(screen, room.getRoomScript().getTop(), room.getRoomScript().getLeft());
+        room.getRoomScreenImage().display(screen, room.getRoomScript().getTop(), room.getRoomScript().getLeft());
         // display actors
         Arrays.stream(Actor.values()).filter(actor -> RoomContext.actorPresent(getContext(), actor)).forEach(actor -> {
             final Entry<Integer, Integer> actorPlace = RoomContext.actorPlace(getContext(), actor);
-            final Image actorImage = actor.getImage();
-            actorImage.display(screen, actorPlace.getKey(), actorPlace.getValue());
+            final ScreenImage actorScreenImage = actor.getImage();
+            actorScreenImage.display(screen, actorPlace.getKey(), actorPlace.getValue());
         });
     }
 

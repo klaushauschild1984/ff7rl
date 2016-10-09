@@ -19,8 +19,8 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 import de.hauschild.ff7rl.assets.Resources;
-import de.hauschild.ff7rl.assets.images.Image;
 import de.hauschild.ff7rl.assets.images.Images;
+import de.hauschild.ff7rl.assets.images.ScreenImage;
 
 import groovy.lang.GroovyClassLoader;
 import groovy.lang.GroovyCodeSource;
@@ -54,14 +54,14 @@ public enum Rooms {
         @Override
         public Room load(final String roomName) throws Exception {
             LOGGER.debug("Load room [{}]", roomName);
-            final Image roomImage = Images.getImage(ROOMS_ASSETS__PATH, roomName);
+            final ScreenImage roomScreenImage = Images.getScreenImage(ROOMS_ASSETS__PATH, roomName);
             final boolean[][] walls = getWalls(roomName);
             RoomScript roomScript = getScript(roomName);
-            return new Room(roomImage, walls, roomScript);
+            return new Room(roomScreenImage, walls, roomScript);
         }
 
         private boolean[][] getWalls(final String roomName) {
-            final BufferedImage wallsImage = Images.loadImage(ROOMS_ASSETS__PATH, String.format("%s/walls.png", roomName));
+            final BufferedImage wallsImage = Images.getImage(ROOMS_ASSETS__PATH, String.format("%s/walls.png", roomName));
             final Color[][] colors = Images.getColors(wallsImage);
             int width = colors.length;
             int height = colors[0].length;
