@@ -1,5 +1,6 @@
 import de.hauschild.ff7rl.Actor
 import de.hauschild.ff7rl.context.Context
+import de.hauschild.ff7rl.context.KernelContext
 import de.hauschild.ff7rl.context.RoomContext
 
 class RoomScript {
@@ -20,7 +21,7 @@ class RoomScript {
     }
 
     void enter() {
-        RoomContext.setRegion(context, "Mako Reactor");
+        KernelContext.setRegion(context, "Mako Reactor");
         RoomContext.placeActor(context, Actor.CLOUD, top, 12);
         RoomContext.activeActor(context, Actor.CLOUD);
     }

@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import com.google.common.collect.Maps;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.googlecode.lanterna.TextColor.RGB;
 
 /**
  * @author Klaus Hauschild
@@ -31,7 +32,8 @@ public class Context {
 
     public static Context createStartContext() {
         final Context context = new Context();
-        context.set(RoomContext.ROOM_NAME, "assault_on_mako_reactor_no_1/room_a");
+        RoomContext.setRoomName(context, "assault_on_mako_reactor_no_1/room_a");
+        KernelContext.setColors(context, new RGB(0, 0, 128));
         return context;
     }
 

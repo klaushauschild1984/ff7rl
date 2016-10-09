@@ -6,27 +6,31 @@
  */
 package de.hauschild.ff7rl.ui;
 
-import com.googlecode.lanterna.TextColor.RGB;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
+
+import de.hauschild.ff7rl.context.Context;
+import de.hauschild.ff7rl.context.KernelContext;
 
 /**
  * @author Klaus Hauschild
  */
 public class ScreenBorder implements Displayable {
 
-    private final int width;
-    private final int height;
+    private final Context context;
+    private final int     width;
+    private final int     height;
 
-    public ScreenBorder(final int width, final int height) {
+    public ScreenBorder(final Context context, final int width, final int height) {
+        this.context = context;
         this.width = width;
         this.height = height;
     }
 
     @Override
-    public void display(Screen screen, int top, int left) {
+    public void display(final Screen screen, final int top, final int left) {
         final TextGraphics textGraphics = screen.newTextGraphics();
-        textGraphics.setBackgroundColor(new RGB(0, 0, 128));
+        textGraphics.setBackgroundColor(KernelContext.getColor(context));
 
         // place corners
         textGraphics.putString(left, top, "+");

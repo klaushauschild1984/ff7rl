@@ -44,11 +44,13 @@ enum ConsoleScriptHelper {
     }
 
     public static List<Field> getFields(final Object object) {
-        List<Field> fields = ReflectionUtils.getAllFields(object.getClass()).stream()
-                .filter(field -> !IGNORE_BY_CLASSNAME.contains(field.getDeclaringClass().getName()))
-                .filter(field -> !field.getName().equals("this$0")).filter(field -> !field.getName().contains("$jacoco"))
-                .sorted((field1, field2) -> field1.getName().compareTo(field2.getName())).collect(Collectors.toList());
-        Set<String> uniqueNames = Sets.newHashSet();
+        final List<Field> fields = ReflectionUtils.getAllFields(object.getClass()).stream() //
+                .filter(field -> !IGNORE_BY_CLASSNAME.contains(field.getDeclaringClass().getName())) //
+                .filter(field -> !field.getName().equals("this$0")) //
+                .filter(field -> !field.getName().contains("$jacoco")) //
+                .sorted((field1, field2) -> field1.getName().compareTo(field2.getName())) //
+                .collect(Collectors.toList());
+        final Set<String> uniqueNames = Sets.newHashSet();
         return fields.stream().filter(field -> {
             if (uniqueNames.contains(field.getName())) {
                 return false;
@@ -59,10 +61,11 @@ enum ConsoleScriptHelper {
     }
 
     public static List<Method> getMethods(final Object object) {
-        final List<Method> methods = ReflectionUtils.getAllMethods(object.getClass()).stream()
-                .filter(method -> !IGNORE_BY_CLASSNAME.contains(method.getDeclaringClass().getName()))
-                .filter(method -> !method.getName().contains("$jacoco"))
-                .sorted((method1, method2) -> method1.getName().compareTo(method2.getName())).collect(Collectors.toList());
+        final List<Method> methods = ReflectionUtils.getAllMethods(object.getClass()).stream() //
+                .filter(method -> !IGNORE_BY_CLASSNAME.contains(method.getDeclaringClass().getName())) //
+                .filter(method -> !method.getName().contains("$jacoco")) //
+                .sorted((method1, method2) -> method1.getName().compareTo(method2.getName())) //
+                .collect(Collectors.toList());
         final Set<String> uniqueNames = Sets.newHashSet();
         // TODO handle overloaded methods with same name correct (now they will filtered)
         return methods.stream().filter(method -> {

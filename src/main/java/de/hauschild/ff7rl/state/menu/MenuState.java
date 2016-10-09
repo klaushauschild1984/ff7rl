@@ -35,11 +35,11 @@ public class MenuState extends AbstractState {
         textGraphics.setBackgroundColor(new RGB(0, 0, 128));
 
         // region
-        new ScreenBorder(60, 3).display(screen, 45, 60);
-        textGraphics.putString(61, 46, RoomContext.getRegion(getContext()));
+        new ScreenBorder(getContext(), 60, 3).display(screen, 45, 60);
+        textGraphics.putString(61, 46, KernelContext.getRegion(getContext()));
 
         // gil and steps
-        new ScreenBorder(30, 6).display(screen, 38, 90);
+        new ScreenBorder(getContext(), 30, 6).display(screen, 38, 90);
         textGraphics.putString(91, 39, "Steps");
         textGraphics.putString(91, 40, Strings.padStart(String.valueOf(KernelContext.getSteps(getContext())), 28, ' '));
         textGraphics.putString(91, 41, "Gil");

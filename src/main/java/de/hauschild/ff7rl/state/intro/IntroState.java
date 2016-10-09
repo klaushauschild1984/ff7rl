@@ -55,12 +55,12 @@ public class IntroState extends AbstractState {
         } catch (final Exception exception) {
             throw new RuntimeException("Unable to read title graphic.", exception);
         }
+        introSound = Sounds.getSound("1-01 Prelude.mp3");
     }
 
     @Override
     public void enter() {
         super.enter();
-        introSound = Sounds.getSound("1-01 Prelude.mp3");
         introSound.start();
         mainMenu = new ScreenMenu<>(Lists.newArrayList(newGameEntry, continueEntry, soundTestEntry), 35, 50);
     }
@@ -72,7 +72,7 @@ public class IntroState extends AbstractState {
             screen.newTextGraphics().putString(7, i, line);
             i++;
         }
-        screen.newTextGraphics().putString(96, 47, "(c) 2015 Klaus Hauschild");
+        screen.newTextGraphics().putString(98, 47, "© 2015 Klaus Hauschild");
         mainMenu.display(screen);
     }
 

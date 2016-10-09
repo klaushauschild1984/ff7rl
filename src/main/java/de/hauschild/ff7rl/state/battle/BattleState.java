@@ -38,7 +38,7 @@ public class BattleState extends AbstractState {
 
     @Override
     public void display(final Screen screen) {
-        new ScreenBorder(60, 8).display(screen, 30, 0);
+        new ScreenBorder(getContext(), 60, 8).display(screen, 30, 0);
 
         screen.newTextGraphics().putString(2, 31, "Cloud");
         screen.newTextGraphics().putString(20, 31, "6666/9999");

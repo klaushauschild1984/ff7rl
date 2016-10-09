@@ -6,16 +6,18 @@
  */
 package de.hauschild.ff7rl.state.soundtest;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
 import de.hauschild.ff7rl.Threads;
 import de.hauschild.ff7rl.assets.sounds.Sound;
 import de.hauschild.ff7rl.assets.sounds.Sounds;
 import de.hauschild.ff7rl.context.Context;
+import de.hauschild.ff7rl.context.KernelContext;
 import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.state.AbstractState;
 import de.hauschild.ff7rl.state.StateHandler;
@@ -37,7 +39,7 @@ public class SoundTestState extends AbstractState {
 
     public SoundTestState(final Context context) {
         super(StateType.SOUND_TEST, context);
-        cdMenus = Arrays.asList(1, 2, 3, 4).stream()
+        cdMenus = Stream.of(1, 2, 3, 4)
                 .collect(Collectors.toMap(cd -> cd,
                         cd -> new ScreenMenu<>(
                                 Sounds.getAllSounds().stream().filter(sound -> sound.startsWith(Integer.toString(cd)))
@@ -47,8 +49,10 @@ public class SoundTestState extends AbstractState {
 
     @Override
     public void display(final Screen screen) {
-        new ScreenBorder(82, 4).display(screen, 1, 17);
-        screen.newTextGraphics().putString(19, 3,
+        new ScreenBorder(getContext(), 83, 4).display(screen, 1, 17);
+        final TextGraphics textGraphics = screen.newTextGraphics();
+        textGraphics.setBackgroundColor(KernelContext.getColor(getContext()));
+        textGraphics.putString(19, 3,
                 String.format("[LEFT] CD %s [RIGHT] | [UP] Track [DOWN] | [ACCEPT] play/stop | [MENU] auto play", cd));
         getCdMenu().display(screen);
     }

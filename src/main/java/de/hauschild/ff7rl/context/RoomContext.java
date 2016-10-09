@@ -21,20 +21,16 @@ public enum RoomContext {
 
     ;
 
-    static final String ACTIVE_ACTOR = "ff7rl.context.room.active-actor";
-    static final String ROOM_NAME    = "ff7rl.context.room.name";
-    static final String ACTOR_PLACE  = "ff7rl.context.room.actor-place.";
+    private static final String ACTIVE_ACTOR = "ff7rl.context.room.active-actor";
+    private static final String ROOM_NAME    = "ff7rl.context.room.name";
+    private static final String ACTOR_PLACE  = "ff7rl.context.room.actor-place.";
 
     public static String getRoomName(final Context context) {
         return (String) context.get(ROOM_NAME);
     }
 
-    public static String getRegion(final Context context) {
-        return (String) context.get(KernelContext.REGION);
-    }
-
-    public static void setRegion(final Context context, final String region) {
-        context.set(KernelContext.REGION, region);
+    public static void setRoomName(final Context context, final String room) {
+        context.set(ROOM_NAME, room);
     }
 
     public static void placeActor(final Context context, final Actor actor, final int top, final int left) {
