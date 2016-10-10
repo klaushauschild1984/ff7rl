@@ -26,6 +26,4 @@
 - [![Build Status](https://travis-ci.org/klaushauschild1984/ff7rl.svg?branch=master)](https://travis-ci.org/klaushauschild1984/ff7rl)
 - [![codecov](https://codecov.io/gh/klaushauschild1984/ff7rl/branch/master/graph/badge.svg)](https://codecov.io/gh/klaushauschild1984/ff7rl)
 - [![Dependency Status](https://www.versioneye.com/user/projects/5667279cf376cc002c001068/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5667279cf376cc002c001068)
-- [![Issue Stats](http://issuestats.com/github/klaushauschild1984/ff7rl/badge/pr)](http://issuestats.com/github/klaushauschild1984/ff7rl)
-- [![Issue Stats](http://issuestats.com/github/klaushauschild1984/ff7rl/badge/issue)](http://issuestats.com/github/klaushauschild1984/ff7rl)
 - [![codebeat badge](https://codebeat.co/badges/6cb3193a-fcea-41e4-88cb-36c43ff93a51)](https://codebeat.co/projects/github-com-klaushauschild1984-ff7rl)
