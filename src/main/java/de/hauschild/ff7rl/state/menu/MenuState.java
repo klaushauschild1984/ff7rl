@@ -6,6 +6,14 @@
  */
 package de.hauschild.ff7rl.state.menu;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import de.hauschild.ff7rl.context.SaveStates;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.google.common.base.Strings;
 import com.googlecode.lanterna.TextColor.RGB;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -13,7 +21,6 @@ import com.googlecode.lanterna.screen.Screen;
 
 import de.hauschild.ff7rl.context.Context;
 import de.hauschild.ff7rl.context.KernelContext;
-import de.hauschild.ff7rl.context.RoomContext;
 import de.hauschild.ff7rl.input.Input;
 import de.hauschild.ff7rl.state.AbstractState;
 import de.hauschild.ff7rl.state.StateHandler;
@@ -52,6 +59,10 @@ public class MenuState extends AbstractState {
             return;
         }
         switch (input) {
+            case ACCEPT:
+                // TODO only for debugging, remove this!
+                SaveStates.writeSlot(getContext(), 1);
+                break;
             case MENU:
             case ABORT:
                 stateHandler.nextState(KernelContext.getLastState(getContext()));

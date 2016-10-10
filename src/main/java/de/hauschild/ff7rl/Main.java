@@ -132,7 +132,7 @@ enum Main {
             // update display
             displayState(screen, state);
             // get next input
-            Input input = getInput(screen, inputMapping, state, skipNextInput);
+            final Input input = getInput(screen, inputMapping, state, skipNextInput);
             // update state
             final StateHandler stateHandler = new StateHandler();
             state.input(input, stateHandler);

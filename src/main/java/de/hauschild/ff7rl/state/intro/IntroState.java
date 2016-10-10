@@ -12,6 +12,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import de.hauschild.ff7rl.context.KernelContext;
+import de.hauschild.ff7rl.context.SaveStates;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,6 +57,9 @@ public class IntroState extends AbstractState {
         } catch (final Exception exception) {
             throw new RuntimeException("Unable to read title graphic.", exception);
         }
+        if (!SaveStates.getPresentSaveSlots().isEmpty()) {
+            continueEntry.setEnabled(true);
+        }
         introSound = Sounds.getSound("1-01 Prelude.mp3");
     }
 
@@ -89,10 +94,14 @@ public class IntroState extends AbstractState {
                 mainMenu.previous();
                 break;
             case ACCEPT:
-                Entry selected = mainMenu.select();
+                final Entry selected = mainMenu.select();
                 LOGGER.debug("[{}] selected.", selected);
                 if (selected.equals(newGameEntry)) {
                     stateHandler.nextState(StateType.INTERIOR_MAP);
+                } else if (selected.equals(continueEntry)) {
+                    // TODO change to slot selection
+                    SaveStates.restoreSlot(getContext(), SaveStates.getPresentSaveSlots().get(0));
+                    stateHandler.nextState(KernelContext.getLastState(getContext()));
                 } else if (selected.equals(soundTestEntry)) {
                     stateHandler.nextState(StateType.SOUND_TEST);
                 }

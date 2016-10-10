@@ -22,7 +22,6 @@ import com.googlecode.lanterna.TextColor.RGB;
 public class Context {
 
     private static final Logger       LOGGER = LoggerFactory.getLogger(Context.class);
-
     private static final Gson         GSON   = new GsonBuilder().setPrettyPrinting().create();
 
     private final Map<String, Object> data   = Maps.newHashMap();
@@ -37,13 +36,12 @@ public class Context {
         return context;
     }
 
-    public static Context fromJson(final String json) {
-        final Context context = new Context();
+    static void fromJson(final Context context, final String json) {
+        context.data.clear();
         context.data.putAll(GSON.fromJson(json, Map.class));
-        return context;
     }
 
-    public static String toJson(final Context context) {
+    static String toJson(final Context context) {
         return GSON.toJson(context.data);
     }
 
@@ -55,6 +53,10 @@ public class Context {
         final Object value = data.get(key);
         if (value == null) {
             return defaultValue;
+        }
+        if (defaultValue != null && defaultValue instanceof Integer && value instanceof Double) {
+            set(key, ((Double) value).intValue());
+            return get(key, defaultValue);
         }
         return (T) value;
     }

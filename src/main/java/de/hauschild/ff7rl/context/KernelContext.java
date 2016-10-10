@@ -34,11 +34,11 @@ public enum KernelContext {
     }
 
     public static void setLastState(final Context context, final StateType type) {
-        context.set(LAST_STATE, type);
+        context.set(LAST_STATE, type.name());
     }
 
     public static StateType getLastState(final Context context) {
-        return context.get(LAST_STATE);
+        return StateType.valueOf(context.get(LAST_STATE));
     }
 
     public static String getRegion(final Context context) {

@@ -10,6 +10,9 @@ class RoomScript {
 
     void initialize(final Context context) {
         this.context = context;
+        KernelContext.setRegion(context, "Mako Reactor");
+        RoomContext.placeActor(context, Actor.CLOUD, top, 12);
+        RoomContext.activeActor(context, Actor.CLOUD);
     }
 
     int getTop() {
@@ -21,9 +24,6 @@ class RoomScript {
     }
 
     void enter() {
-        KernelContext.setRegion(context, "Mako Reactor");
-        RoomContext.placeActor(context, Actor.CLOUD, top, 12);
-        RoomContext.activeActor(context, Actor.CLOUD);
     }
 
     int update() {
