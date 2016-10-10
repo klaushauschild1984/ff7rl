@@ -27,3 +27,5 @@
 - [![codecov](https://codecov.io/gh/klaushauschild1984/ff7rl/branch/master/graph/badge.svg)](https://codecov.io/gh/klaushauschild1984/ff7rl)
 - [![Dependency Status](https://www.versioneye.com/user/projects/5667279cf376cc002c001068/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5667279cf376cc002c001068)
 - [![codebeat badge](https://codebeat.co/badges/6cb3193a-fcea-41e4-88cb-36c43ff93a51)](https://codebeat.co/projects/github-com-klaushauschild1984-ff7rl)
+- [![Code Climate](https://codeclimate.com/github/klaushauschild1984/ff7rl/badges/gpa.svg)](https://codeclimate.com/github/klaushauschild1984/ff7rl)
+- [![Issue Count](https://codeclimate.com/github/klaushauschild1984/ff7rl/badges/issue_count.svg)](https://codeclimate.com/github/klaushauschild1984/ff7rl)
